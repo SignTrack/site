@@ -1,0 +1,130 @@
+<?php
+$auth = Zend_Auth::getInstance();
+$controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+$action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+$role="login";
+if($auth->getIdentity()){
+    $role = $auth->getIdentity()->role;
+}
+
+?>
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+
+        <title><?= (!is_null($this->pageTitle)) ? $this->pageTitle : "Sign Track App Database"; ?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="author" content="Widely Interactive" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <link rel="Shortcut Icon" href="<?= $this->serverUrl() ?>/wp-content/themes/signtrack/images/favicon.png" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        
+        <link href="<?= $this->baseUrl() ?>/css/slick.grid.css" rel="stylesheet">
+        <link href="<?= $this->baseUrl() ?>/css/bootstrap.css" rel="stylesheet">
+        <link href="<?= $this->baseUrl() ?>/css/slick-default-theme.css" rel="stylesheet">
+        <link href="<?= $this->baseUrl() ?>/css/datepicker.css" media="all" rel="stylesheet" >
+        <link href="<?= $this->baseUrl() ?>/css/style.css" rel="stylesheet">
+        
+        <script src="<?= $this->baseUrl() ?>/js/jquery-1.8.2.min.js"></script>
+        <script src="<?= $this->baseUrl() ?>/js/slick.formatters.js"></script>
+        <script src="<?= $this->baseUrl() ?>/js/bootstrap.min.js"></script>
+        <script src="<?= $this->baseUrl() ?>/js/slick.core.js"></script>
+        <script src="<?= $this->baseUrl() ?>/js/jquery.event.drag-2.0.min.js"></script>
+        <script src="<?= $this->baseUrl() ?>/js/slick.grid.js"></script>
+        <script src="<?= $this->baseUrl() ?>/js/functions.js"></script>
+        <script src="<?= $this->baseUrl() ?>/js/slick.dataview.js"></script>
+        <script src="<?= $this->baseUrl() ?>/js/bootstrap-datepicker.js"></script>
+        <script>
+            var APPLICATION_URL = '<?= $this->baseUrl() ?>';
+            var DOMAIN_URL = '<?= $this->serverUrl() ?>';
+            var ACTION = '<?= $action ?>';
+            var CONTROLLER = '<?= $controller ?>';
+            var CURRTIME='<?php echo $this->date ?>';
+            var TRAIL90='<?php echo $this->date90 ?>';
+            var TOMORROW='<?php echo $this->tomorrow ?>';
+            var SIGNLIMIT='<?php echo $this->sign_limit ?>';
+            var ISEDITOR=0;
+        </script>
+        <?php 
+        if($controller=='campaign'){
+        ?>
+        <script>
+    role='<?= $role ?>';     
+    </script>
+        <?php } ?>
+    </head>
+    <body>
+        
+        <div id="gray-top"></div>
+        <?php if($role!="login" && $controller != "auth"){ ?>
+        <div id="black-top"></div>
+        <?php } ?>
+        <div id="fullscreen">
+            
+        <?php
+        if ($controller != "auth" && $controller != "error") {
+            
+            ?>
+            
+<table id="uitable">
+    <tr id="blackcontrols" style="height:35px;"><td>
+            <div class="row-fluid">
+                <div class="span5" style="text-align:left;"> <?php if($this->campaign){ ?>
+                    <div style="display:inline-block;margin-top:7px;margin-left:10px;color:#fff;"><?php echo $this->campaign['name']; ?></div> | <div style="display:inline-block;margin-top:7px;color:#777;"><?php echo $this->campaign['locale']; ?></div>
+                    <?php } ?>
+                </div>
+                <div class="span7 nav">
+                    <div style="text-align:right"><?php echo $this->loggedInAs(); ?></div>
+                </div>
+            </div>
+        </td></tr>
+    <tr id="topcontrols"><td>
+            <div class="row-fluid subnav">
+
+<div class="span5" style="text-align:left;">
+                    <img src="<?= $this->baseUrl() ?>/images/logo.png" style="height:60px;margin-top:20px;margin-left:10px;">
+                </div>
+<div class="span7 nav">
+    
+<?php if($this->campaign){ ?>
+                    <ul class="pull-right" style="margin-right:10px;">
+                        
+                        <li id="nav-dashboard" class="nav-button <?php if ($controller == "campaign") echo "active"; ?>"><a href="<?= $this->baseUrl().'/campaign/'.$this->campaign['campaign_id'] ?>/dashboard"><div class="navdiv">Dashboard</div></a><div><?php if ($controller == "campaign") {?><img class="arrow-up" src="<?= $this->baseUrl() ?>/images/arrow-up.png"><?php } ?></div></li>
+                        <li id="nav-sign" class="nav-button <?php if ($controller == "sign") echo "active"; ?>"><a href="<?= $this->baseUrl().'/campaign/'.$this->campaign['campaign_id'] ?>/sign"><div class="navdiv">Sign Locations</div></a><div><?php if ($controller == "sign") {?><img class="arrow-up" src="<?= $this->baseUrl() ?>/images/arrow-up.png"><?php } ?></div></li>
+                        <li id="nav-log" class="nav-button <?php if ($controller == "log") echo "active"; ?>"><a href="<?= $this->baseUrl().'/campaign/'.$this->campaign['campaign_id'] ?>/log"><div class="navdiv">Logs</div></a><div><?php if ($controller == "log") {?><img class="arrow-up" src="<?= $this->baseUrl() ?>/images/arrow-up.png"><?php } ?></div></li>
+                        <li id="nav-user" class="nav-button <?php if ($controller == "user") echo "active"; ?>"><a href="<?= $this->baseUrl().'/campaign/'.$this->campaign['campaign_id'] ?>/user"><div class="navdiv">Team</div></a><div><?php if ($controller == "user") {?><img class="arrow-up" src="<?= $this->baseUrl() ?>/images/arrow-up.png"><?php } ?></div></li>
+                     
+                    </ul>
+<?php } else { ?>
+    <ul class="pull-right" style="margin-right:10px;">
+                        <li id="nav-campaign" class="nav-button <?php if ($controller == "campaign") echo "active"; ?>"><a href="<?= $this->baseUrl() ?>/campaign"><div class="navdiv">Campaigns</div></a><div><?php if ($controller == "campaign") {?><img class="arrow-up" src="<?= $this->baseUrl() ?>/images/arrow-up.png"><?php } ?></div></li>
+                        <li id="nav-user" class="nav-button <?php if ($controller == "user") echo "active"; ?>"><a href="<?= $this->baseUrl() ?>/user"><div class="navdiv">Users</div></a><div><?php if ($controller == "user") {?><img class="arrow-up" src="<?= $this->baseUrl() ?>/images/arrow-up.png"><?php } ?></div></li>
+                     
+                    </ul>
+    <?php } ?>
+                </div>
+
+                
+
+            </div>
+   
+            </td></tr>
+    <tr id="page"><td>
+            
+            <?php
+echo $this->layout()->content;
+?>
+            </td></tr></table> 
+    <?php
+} else {
+    echo $this->layout()->content;
+
+}
+?>
+        </div>    
+</body>
+</html>
+<script>
+    $('.img-logo').attr('src',APPLICATION_URL+'/images/logo.png')
+    </script>

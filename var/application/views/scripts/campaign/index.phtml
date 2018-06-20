@@ -1,0 +1,90 @@
+<?= $this->headScript() ?> 
+<?= $this->headLink() ?>
+<table id="page-options"><tr style="height:40px;"><td>
+<div class="row-fluid header" id="layout-header" >
+
+           
+
+                <div class="filters pull-left">
+                    
+                
+                    </div>
+                   <div id="content-options" class="pull-right">
+                         
+    <a class="btn dropdown-toggle btn-primary pull-right btn-add" href="javascript:show_add()">
+    <i class="icon-plus icon-white"></i>&nbsp;<span id="btn-add">Add Campaign</span>
+    </a>
+    </div>
+</div>
+    
+
+
+
+        </td></tr><tr><td>
+&nbsp;            
+        </td></tr></table>
+<div id="tabs-1" class="tab-content clearfix">
+<!--        <div class="nav-options"><button style="height:30px;padding:5px 10px;" class="medium" id="btn-user-add"><span class="icon" data-icon="+"></span>Add User</button></div>-->
+            <div id="grid-list" ></div>
+            </div>
+<div id="deleteModal" style="height:160px !important;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Delete Campaign</h3>
+  </div>
+  <div class="modal-body">
+    <p id="msg-user-delete"></p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">No, Cancel Delete</button>
+    <button class="btn btn-primary" onclick="confirm_delete();">Yes, Delete</button>
+  </div>
+</div><!--Delete Modal-->
+
+<div id="addModal" data-backdrop="static" class="modal hide fade center600" style="max-width:700px;max-height:260px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Add Campaign</h3>
+  </div>
+    <div class="modal-body">
+        <form id="form-campaign">
+    <div class="row-fluid"> 
+    	<div class="span4">
+        	<label for="acct-fname">First Name</label>
+            <input id="acct-fname" name="acct-fname" maxlength="50" type="text" class="span11 limited-text required" placeholder="First">
+        </div>
+        
+        <div class="span4">
+        	<label for="acct-lname">Last Name</label>
+            <input id="acct-lname" name="acct-lname" maxlength="50" type="text" class="span11 limited-text required" placeholder="Last">
+        </div>
+        <div class="span4">
+        	<label for="acct-email">Email Address</label>
+            <input id="acct-email" name="acct-email" maxlength="100" type="text" class="span11 limited-text required" placeholder="Email">
+        </div>
+    </div>
+     <div class="row-fluid"> 
+    	<div class="span4">
+        	<label for="acct-area">Phone</label>
+            <input type="text" class="required" style="width:auto;" name="acct-area" id="acct-area" maxlength="3" size="3" /> -
+            <input type="text" class="required" style="width:auto;" name="acct-phone1" id="acct-phone1" maxlength="3" size="3" /> -
+            <input type="text" class="required" style="width:auto;" name="acct-phone2" id="acct-phone2" maxlength="4" size="5" />
+        </div>
+        
+        <div class="span4">
+        	<label for="acct-limit">Sign Location Limit</label>
+                <input id="acct-limit" name="acct-limit" maxlength="50" type="number" class="span11 limited-text required" placeholder="# of Sign Locations">
+        </div>
+        <div class="span4">
+        	<label for="acct-qty">Months Valid</label>
+            <input id="acct-qty" name="acct-qty" maxlength="100" type="number" class="span11 limited-text required" placeholder="# of Months">
+        </div>
+    </div> 
+            <input type="hidden" value="addCampaign" id="type" name="type"/>
+        </form>
+    </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button class="btn btn-primary" id="btn-update" onclick="addCampaign();">Add Campaign</button>
+  </div>
+</div>

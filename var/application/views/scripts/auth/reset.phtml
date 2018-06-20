@@ -1,0 +1,77 @@
+<?php 
+if($this->error_msg=="email sent"){
+    $msg = "An email with instructions to reset your password has been sent.";
+}else if($this->mode=="reset" && $this->error_msg==""){
+    $msg = "Please enter a new password.";
+}else{
+    $msg = "Please enter your email address and instructions to reset your password will be sent.";
+}
+    
+        ?>
+<div id="login-form">
+<div class="container-fluid" style="padding:0;">
+    <img src="<?php echo $this->baseUrl();?>/images/logo_w.png" style="height:50px;margin-bottom: 30px;"/>
+    <?php if($this->mode=="send_email"){ ?>
+        <form class="form-signin" method="POST" action="<?php echo $this->baseUrl();?>/reset">
+            <p>RESET YOUR PASSWORD</p>
+            <?php if($this->error_msg!="email sent"){ ?>
+            <span>Please enter your email address below and instructions to reset your password will be sent to you immediately.  Thank you.</span>
+            <?php echo $this->msg ?>
+            <input type="text" style="margin-top:10px;" name="username" maxlength="100" class="input-block-level" placeholder="Email Address">   
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <a style="float:right" href="<?php echo $this->baseUrl();?>/login">Login</a>
+            <?php } ?>
+        </form>
+    <?php }else if($this->mode=="reset"){?>
+    <form class="form-signin" onSubmit="return form_validate()" method="POST" action="<?php echo $this->baseUrl();?>/reset">
+
+            <p>PASSWORD SETUP</p>
+           <?php if($this->error_msg=="email sent"){ ?>
+            <span>An email with instructions to reset your password has been sent.</span>
+            <?php } else{ ?>
+            <span>Please enter a password.</span>
+                 <label>Password</label>
+            <input type="hidden" id="h" name="h" value="<?php echo $_REQUEST['h']; ?>"/>
+            <input type="hidden" id="username" name="username" value="<?php echo $this->username; ?>"/>
+            <input type="password" maxlength="500" id="password" class="input-block-level" style="margin-bottom:0;" placeholder="Password" name="password"/>
+            <label>Confirm Password</label>
+            <input type="password" maxlength="500" id="password2" name="password2" class="input-block-level" placeholder="Confirm Password"/>
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <?php } ?>
+<!--            <a href="<?php echo $this->baseUrl();?>/login">Login</a>-->
+        </form>
+    <?php }else if($this->mode=="complete"){?>
+    <form class="form-signin" method="POST">
+            <p>PASSWORD SETUP</p>
+            <span>Your password has been updated. Please login with the new password.</span>
+            <p></p>
+            <a href="<?php echo $this->baseUrl();?>/login">Login</a>
+        </form>
+    <?php }else if($this->mode=="expired"||$this->mode=="invalid"){?>
+    <form class="form-signin" method="POST" action="<?php echo $this->baseUrl();?>/reset">
+           
+            <p>ENTER NEW PASSWORD</p>
+            <p><?php echo $this->msg ?></p>
+            <a style="float:right" href="<?php echo $this->baseUrl();?>/login">Login</a>
+        </form>
+    <?php } ?>
+</div>
+    </div>
+<script>
+    
+    function form_validate(){
+        if($('#password').val().length<3){
+            alert("Please enter a password at least 4 characters long");
+            return false;
+        }
+        if($('#password').val()!=$('#password2').val()){
+            alert("Passwords did not match. Please re-enter");
+            $('#password').val('');
+            $('#password2').val('');
+            return false;
+        }
+            
+        return true;
+
+    }
+    </script>

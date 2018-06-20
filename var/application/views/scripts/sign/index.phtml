@@ -1,0 +1,407 @@
+<?= $this->headScript() ?> 
+<?= $this->headLink() ?>
+<table id="page-options"><tr style="height:40px;"><td>
+<div class="row-fluid header" id="layout-header" style="height:50px; overflow:hidden;">
+
+           
+
+                <div id="sign-filters" class="filters pull-left">
+                    <div id="toggleMapList" class="toggle-btn" onclick="toggleMapList();" style="margin-left:15px;vertical-align: top;"><div class="toggle-active">Map</div><div>List</div></div>
+                    
+                    <button onclick="showHideFilters()" id="btn-filters" style="margin-left:5px;" class="btn"> Filters</button>
+                    <input id="input-sign" type="search" style="margin-right:5px;width:100px;" maxlength="11" placeholder="Sign ID">
+                    <button onclick="getSearch()" class="btn" id="go-btn" style="margin-left:-12px;"><i class="icon-search"></i></button>
+                    <button onclick="resetSearch()" class="btn">Reset</button>
+                    <div id="num-records" style="display:inline-block;border-radius:4px;background-color:#efefef;padding:6px 10px 5px 10px;">Signs</div>
+                    <div id="all-filters">
+    <a href="javascript:showHideFilters()"><i class="icon-remove" style="float:right;"></i></a>
+    <div id="toggleTrafficLayer" class="toggle-btn" onclick="toggleTrafficLayer();"><div class="toggle-active">Traffic</div><div>Hide</div></div>
+    <select name="columns-view" id="select-size" class="form-control">
+                        <option value="">All Signs</option>
+                       <?php
+                        $inventory = $this->inventory;
+                        for($i=0;$i<sizeof($inventory);$i++){
+                            if($inventory[$i]['inventory_type']=='Sign'){
+                                echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+                    <select id="select-status" style="<?php if(isset($this->campaign['is_over']) && $this->campaign['is_over'])echo"display:none"; ?>" class="form-control">
+                        <option value="">All Statuses</option>
+                        <option value="Place">Place</option>
+                        <option value="OK">OK</option>
+                        <option value="Replace">Replace</option>
+                        <option value="Fix">Fix</option>
+                        <option value="Recover">Recover</option>
+                    </select>
+                    
+                    <select id="select-volunteer" class="form-control">
+                        <option value="">All Team Members</option>
+                        <option value="0">Unassigned</option>
+                        <?php
+                        $users = $this->users;
+                        for($i=0;$i<sizeof($users);$i++){
+                            if($users[$i]['role']!='Admin'){
+                            echo '<option value="'.$users[$i]['user_id'].'">'.$users[$i]['lname'].', '.$users[$i]['fname'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+<!--                        <option value="Stats">Stats</option>-->
+                    </select>
+</div>
+                </div>
+    <div id="sign-step1" class="pull-left sign-steps filters">
+        <h1>STEP 1:</h1>
+        <button class="btn pull-right" onclick="showSignStep(0)" style="margin-left:10px;">Cancel</button>
+                    <button onclick="uploadList()" class="btn pull-right btn-primary" style="margin-left:10px;">Import List</button>            
+                    <button onclick="showSignStep(5)" class="btn pull-right btn-primary" style="margin-left:10px;">Enter by Address</button>
+                    <button onclick="showSignStep(2)" class="btn pull-right btn-primary" style="margin-left:10px;">Position on the Map</button>
+                    
+                </div>
+    <div id="sign-step2" class="pull-left sign-steps filters">
+        <h1>Step 2: </h1>
+<!--        <input id="input-quantity" type="text" placeholder="Quantity" style="width:60px;">-->
+        <select id="input-inventory" name="columns-view" style="margin-left:10px; width:120px;" class="form-control">
+                        <option value="0">Sign Type</option>
+                        <?php
+                        $inventory = $this->inventory;
+                        for($i=0;$i<sizeof($inventory);$i++){
+                            if($inventory[$i]['inventory_type']=='Sign'){
+                                //$num_left=($inventory[$i]['num_total']*1)-($inventory[$i]['num_used']*1);
+                                echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].'</option>';
+//echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].' ('.$num_left.')</option>';
+                            }
+                        }
+                            
+                        ?>
+<!--                        <option value="Stats">Stats</option>-->
+                    </select>
+        <select id="input-user" name="columns-view" style="margin-left:10px; width:200px;" class="form-control">
+                       <option value="0">Unassigned</option>
+                        <?php
+                        $users = $this->users;
+                        for($i=0;$i<sizeof($users);$i++){
+                             if($users[$i]['role']!='Admin'){
+                            echo '<option value="'.$users[$i]['user_id'].'">'.$users[$i]['lname'].', '.$users[$i]['fname'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+        <button class="btn pull-right" onclick="showSignStep(0)" style="margin-left:10px;">Cancel</button>
+                    <button onclick="javascript:showSignStep(3)" class="btn pull-right btn-primary" style="margin-left:10px;">Next</button>
+                    
+                </div>
+    <div id="sign-step3" class="pull-left sign-steps filters">
+        <h1>Step 3: Click on map to add markers</h1>
+        <button class="btn pull-right" onclick="showSignStep(0)" style="margin-left:10px;">Cancel</button>
+                    <button onclick="javascript:showSignStep(4);" class="btn pull-right btn-primary" style="margin-left:10px;">Done</button>
+                    
+                </div>
+    <div id="sign-step5" class="pull-left sign-steps filters">
+        <h1>Step 2: Add</h1>
+        <select id="add-inventory" style="margin-left:10px; width:120px;" class="form-control">
+                        <option value="0">Sign Type</option>
+                        <?php
+                        $inventory = $this->inventory;
+                        for($i=0;$i<sizeof($inventory);$i++){
+                            if($inventory[$i]['inventory_type']=='Sign'){
+                                //$num_left=($inventory[$i]['num_total']*1)-($inventory[$i]['num_used']*1);
+                                echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].'</option>';
+//echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].' ('.$num_left.')</option>';
+                            }
+                        }
+                            
+                        ?>
+<!--                        <option value="Stats">Stats</option>-->
+                    </select>
+        <select id="add-user" style="margin-left:10px; width:120px;" class="form-control">
+                       <option value="0">Unassigned</option>
+                        <?php
+                        $users = $this->users;
+                        for($i=0;$i<sizeof($users);$i++){
+                             if($users[$i]['role']!='Admin'){
+                            echo '<option value="'.$users[$i]['user_id'].'">'.$users[$i]['lname'].', '.$users[$i]['fname'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+        <input type="text" id="add-address" name="add-address" style="margin-left:10px; width:200px;" class="form-control" placeholder="Address">
+        <input type="text" id="add-zip" name="add-zip" style="margin-left:10px; width:100px;" class="form-control" placeholder="Zip/Postal">
+        <div class="btns">
+        <button class="btn pull-right" onclick="showSignStep(0)" id="btn-address-done" style="margin-left:10px;">Cancel</button>
+                    <button onclick="javascript:addLocationByAddress();" class="btn pull-right btn-primary" style="margin-left:10px;">Add</button>
+                    </div>
+                </div>
+    <div id="task-step1" class="pull-left sign-steps filters">
+        <h1>Step 1: Select a Team Member</h1>
+        <select name="input-assign" id="input-assign" style="margin-left:10px; width:200px;" class="form-control">
+                        <?php
+                        $users = $this->users;
+                        for($i=0;$i<sizeof($users);$i++){
+                             if($users[$i]['role']!='Admin'){
+                            echo '<option value="'.$users[$i]['user_id'].'">'.$users[$i]['lname'].', '.$users[$i]['fname'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+        <button class="btn pull-right" onclick="showTaskStep(0)" style="margin-left:10px;">Cancel</button>
+                    <button onclick="javascript:showTaskStep(2)" class="btn pull-right btn-primary" style="margin-left:10px;">Next</button>
+                    
+                </div>
+    <div id="task-step2" class="pull-left sign-steps filters">
+        <h1>Step 2: Select Locations to Assign</h1>
+        
+        <button class="btn pull-right" onclick="showTaskStep(0)" style="margin-left:10px;">Cancel</button>
+                    <button onclick="javascript:showTaskStep(3)" class="btn pull-right btn-primary" style="margin-left:10px;">Done</button>
+                    
+                </div>
+<div id="content-options" class="pull-right" >
+                                <div style="text-align:left;">
+                                    
+                                    <button class="btn btn-primary pull-right btn-add" onclick="showSignStep(1);" type="button"><i class="icon-plus icon-white"></i>&nbsp;<span id="btn-add">Add Locations</span></button>
+                                    <button class="btn btn-primary pull-right btn-add" onclick="setDefaultMap();" type="button"><span id="btn-add">Save as Default View</span></button>
+                                    <button class="btn btn-primary pull-right btn-add" onclick="showTaskStep(1);" type="button"><span id="btn-add">Assign Tasks</span></button>
+                                    
+<!--                                <button onclick="filterSearch(1)" class="btn pull-right" style="margin-right:10px;"><i class="icon-file"></i> Excel Export</button>-->
+                                </div>
+    </div></div>
+    
+
+
+
+        </td></tr><tr><td>
+<table id="signtable"><tr><td><div id="map"></div></td></tr></table>         
+        </td></tr></table>
+<div id="tabs-1" style="display:none" class="tab-content clearfix">
+<!--        <div class="nav-options"><button style="height:30px;padding:5px 10px;" class="medium" id="btn-user-add"><span class="icon" data-icon="+"></span>Add User</button></div>-->
+            <div id="grid-list">
+                <div id="itemGrid" ></div>
+
+            </div>
+            </div>
+<!-- modaleDelete -->
+<div id="deleteModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Delete Sign</h3>
+  </div>
+  <div class="modal-body">
+    <p id="msg-user-delete"></p>
+  </div>
+  <div class="modal-footer">  
+    <button class="btn" data-dismiss="modal" aria-hidden="true">No, Cancel Delete</button>
+    <button class="btn btn-primary" onclick="confirmDelete();">Yes, Delete</button>
+    
+  </div>
+</div><!--Delete Modal1-->
+<div id="editModal" data-backdrop="static" class="modal hide fade center600" style="max-width:400px; height:220px; margin-left:-200px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Edit Sign</h3>
+  </div>
+    <div class="modal-body">
+<div class="row-fluid">
+    <div class="span12">
+        <textarea placeholder="Notes" id="note"></textarea>
+        </div>
+</div>       
+<div class="row-fluid">
+            <div class="span6">
+        	<label>Status</label>
+             <select id="edit-status" onchange="evalStatus()" style="width:100%;" class="form-control">
+
+                    </select>
+        </div>
+        <div class="span6">
+        	<label>Assigned to</label>
+                <select id="edit-user" style="width:100%;" class="form-control">
+                       <option value="0">Unassigned</option>
+                        <?php
+                        $users = $this->users;
+                        for($i=0;$i<sizeof($users);$i++){
+                             if($users[$i]['role']!='Admin'){
+                            echo '<option value="'.$users[$i]['user_id'].'">'.$users[$i]['lname'].', '.$users[$i]['fname'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+        </div>
+        
+    </div>
+
+    <div class="row-fluid" id="row-replace" style="display:none;">
+            <div class="span6">
+        	<label id="lbl-material-used">Material Used</label>
+                <select name="columns-view" id="inv-material" style="width:100%;" class="form-control">
+                       <?php
+                        $inventory = $this->inventory;
+                        for($i=0;$i<sizeof($inventory);$i++){
+                            if($inventory[$i]['inventory_type']=='Material'){
+                                echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+             
+        </div>
+        <div class="span6">
+        	<label>Quantity</label>
+                <select id="inv-num-material" style="width:100%;" class="form-control">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+        </div>
+        
+    </div>
+    <div class="row-fluid" id="row-replace2" style="display:none;">
+            <div class="span6">
+        	<label id="lbl-sign-used">Sign Used</label>
+                <select name="columns-view" id="inv-sign" style="width:100%;" class="form-control">
+                       <?php
+                        $inventory = $this->inventory;
+                        for($i=0;$i<sizeof($inventory);$i++){
+                            if($inventory[$i]['inventory_type']=='Sign'){
+                                echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+             
+        </div>
+        <div class="span6">
+        	<label>Quantity</label>
+                <select name="columns-view" id="inv-num-sign" style="width:100%;" class="form-control">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+        </div>
+        
+    </div>
+    </div>
+  <div class="modal-footer">
+
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button class="btn btn-primary" id="btn-update" onclick="editSave();">Save</button>
+      
+  </div>
+</div>
+
+
+<!-- modalUpload -->
+<div id="uploadModal" data-backdrop="static" class="modal hide fade center600" style="max-width:800px; margin-top:-220px; height:400px; margin-left:-400px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Import List</h3>
+  </div>
+    <div class="modal-body">     
+<div class="row-fluid" id="upload-step1">
+            <div class="span6">
+        	<label>Status</label>
+             <select id="upload-status" onchange="evalStatus()" style="width:100%;" class="form-control">
+<option value="OK">Signs have been placed</option>
+<option value="Place">Signs need to be placed</option>
+                    </select>
+                <label>Assigned to</label>
+                <select id="upload-user" style="width:100%;" class="form-control">
+                       <option value="0">Unassigned</option>
+                        <?php
+                        $users = $this->users;
+                        for($i=0;$i<sizeof($users);$i++){
+                             if($users[$i]['role']!='Admin'){
+                            echo '<option value="'.$users[$i]['user_id'].'">'.$users[$i]['lname'].', '.$users[$i]['fname'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+                <label>Sign Type</label>
+                <select name="columns-view" id="upload-sign" style="width:100%;" class="form-control">
+                       <?php
+                        $inventory = $this->inventory;
+                        for($i=0;$i<sizeof($inventory);$i++){
+                            if($inventory[$i]['inventory_type']=='Sign'){
+                                echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+                <div class="row-fluid" id="upload-materials">
+            <div class="span6">
+        	<label id="lbl-material-used">Material Used for Each</label>
+                <select name="columns-view" id="inv-material-upload" style="width:100%;" class="form-control">
+                       <?php
+                        $inventory = $this->inventory;
+                        for($i=0;$i<sizeof($inventory);$i++){
+                            if($inventory[$i]['inventory_type']=='Material'){
+                                echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].'</option>';
+                            }
+                        }
+                            
+                        ?>
+                    </select>
+             
+        </div>
+        <div class="span6">
+        	<label>Quantity</label>
+                <select id="inv-num-material-upload" style="width:100%;" class="form-control">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+        </div>
+        
+    </div>
+        </div>
+    
+            <div class="span6">
+                <div>CSV File to Import<br/>Note: the first line in your CSV file is ignored. The column order should be address, then zip as depicted in the image below.</div>
+                <img src="<?= $this->baseUrl() ?>/images/graphics/sample-csv.png"/><br/>
+                <div style="margin-top:5px;"><a href="<?= $this->baseUrl() ?>/docs/SignTrack_AdressImport_Sample.csv">Download a sample CSV</a></div>
+                <form id="file-form" action="handler.php" method="POST">
+  <input type="file" id="file-select" style="margin-top:20px;" name="file" accept=".csv"/><br/>
+</form>
+        </div>
+        
+ 
+    </div>
+        <div class="row-fluid" id="upload-step2" style="height:260px;overflow-y:auto;display:none;">
+            <div id="msg-success" style="color:#138600;"></div>
+            <div id="msg-error" style="color:#cc0000"></div>
+            <div id="upload-records" style="margin-top:20px;"></div>
+        </div>
+    </div>
+  <div class="modal-footer">
+
+    <button class="btn btn-upload1" data-dismiss="modal" aria-hidden="true" id="btn-upload-cancel">Cancel</button>
+    <button class="btn btn-primary btn-upload1" id="btn-upload-file">Import</button>
+    <button class="btn btn-upload2" onclick="uploadBack()" aria-hidden="true" id="btn-upload-back" style="display:none;">Back</button>
+    <button class="btn btn-primary btn-upload2" id="btn-upload-done" data-dismiss="modal" style="display:none;">Done</button>
+  </div>
+</div><!--modalUpload-->
+<script>
+    var items = <?= json_encode($this->items) ?>;
+    var inventory = <?= json_encode($this->inventory) ?>;
+    var CAMPAIGN = <?= json_encode($this->campaign) ?>;
+    var USERS = <?= json_encode($this->users) ?>;
+    </script>

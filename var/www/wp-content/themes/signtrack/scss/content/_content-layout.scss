@@ -1,0 +1,42 @@
+#content {
+	@include grid_render(1, true);
+
+	.entry {
+		@include padding(0);
+		@include margin(0);
+
+		.entry-title {}
+
+		.post-info {
+			display: none;
+		}
+
+		.post-meta {
+			display: none;
+		}
+	}
+}
+
+.entry-content {
+	p {
+		// padding-left: 13px;
+		@include padding($padding-small, 0);
+	}
+}
+
+.widely-header-sidebar-content {
+	#inner {
+		// padding: 55px 13px 89px;
+		@include padding($padding-xl, $padding, $padding-xxl); // 55 13 89
+	}
+}
+
+
+
+.inner-shifted-right {
+	position: absolute;
+}
+
+.inner-shifted-left {
+	position: absolute;
+}

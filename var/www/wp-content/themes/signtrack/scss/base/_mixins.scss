@@ -1,0 +1,179 @@
+
+/**
+ * Padding Mixins
+ */
+
+@mixin padding_dir($size, $dir) {
+	@if ($dir == 'top') {
+		padding-top : $size * 1px;
+		//padding-top : $size * .1rem;
+	}
+	@else if ($dir == 'left') {
+		padding-left : $size * 1px;
+		//padding-left : $size * .1rem;
+	}
+	@else if ($dir == 'bottom') {
+		padding-bottom : $size * 1px;
+		//padding-bottom : $size * .1rem;
+	}
+	@else if ($dir == 'right') {
+		padding-right : $size * 1px;
+		//padding-right : $size * .1rem;
+	}
+}
+
+
+@mixin padding($y1, $x1:'', $y2:'', $x2:'') {
+
+	$y1_px : $y1 * 1px;
+	$y1_rem : $y1 * .1rem;
+
+	$x1_px : $y1_px;
+	$x1_rem : $y1_rem;
+
+	$y2_px : $y1_px;
+	$y2_rem : $y1_rem;
+
+	$x2_px : $y1_px;
+	$x2_rem : $y1_rem;
+
+	// ---- Check if padding bottom is defined
+	@if ($y2 != '') {
+		$y2_px : $y2 * 1px;
+		$y2_rem : $y2 * .1rem;
+	}
+
+	// ----- Check is padding right is defined
+	@if ($x1 != '') {
+		$x1_px : $x1 * 1px;
+		$x1_rem : $x1 * .1rem;
+	}
+
+	// ----- Check if padding left is defined
+	@if ($x2 != '') {
+		$x2_px : $x2 * 1px;
+		$x2_rem : $x2 * .1rem;
+	}
+	@else {
+		$x2_px : $x1_px;
+		$x2_rem : $x1_rem;
+	}
+
+	padding: $y1_px $x1_px $y2_px $x2_px;
+	//padding: $y1_rem $x1_rem $y2_rem $x2_rem;
+
+}
+
+
+
+
+/**
+* Margin Mixins
+*/
+
+@mixin margin_dir($size, $dir) {
+	@if ($dir == 'top') {
+		margin-top : $size * 1px;
+		//margin-top : $size * .1rem;
+	}
+	@else if ($dir == 'left') {
+		margin-left : $size * 1px;
+		//margin-left : $size * .1rem;
+	}
+	@else if ($dir == 'bottom') {
+		margin-bottom : $size * 1px;
+		//margin-bottom : $size * .1rem;
+	}
+	@else if ($dir == 'right') {
+		margin-right : $size * 1px;
+		//margin-right : $size * .1rem;
+	}
+}
+
+
+@mixin margin($y1, $x1:'', $y2:'', $x2:'') {
+
+	$y1_px : $y1 * 1px;
+	$y1_rem : $y1 * .1rem;
+
+	$x1_px : $y1_px;
+	$x1_rem : $y1_rem;
+
+	$y2_px : $y1_px;
+	$y2_rem : $y1_rem;
+
+	$x2_px : $y1_px;
+	$x2_rem : $y1_rem;
+
+	// ---- Check if padding bottom is defined
+	@if ($y2 != '') {
+		$y2_px : $y2 * 1px;
+		$y2_rem : $y2 * .1rem;
+	}
+
+	// ----- Check is padding right is defined
+	@if ($x1 != '') {
+		$x1_px : $x1 * 1px;
+		$x1_rem : $x1 * .1rem;
+	}
+
+	// ----- Check if padding left is defined
+	@if ($x2 != '') {
+		$x2_px : $x2 * 1px;
+		$x2_rem : $x2 * .1rem;
+	}
+	@else {
+		$x2_px : $x1_px;
+		$x2_rem : $x1_rem;
+	}
+
+	margin: $y1_px $x1_px $y2_px $x2_px;
+	//margin: $y1_rem $x1_rem $y2_rem $x2_rem;
+
+}
+
+
+
+
+/**
+ * Button Mixins
+ */
+
+@mixin generate_button_styles( $bg, $text, $bg-hover, $text-hover) {
+
+	border-radius: 10px;
+	border: solid 1px $bg-hover;
+	text-align: center;
+
+	background-color: $bg;
+	color: $text;
+	display: inline-block;
+	@include padding($padding, $padding-large);
+
+	&:hover {
+		background-color: $bg-hover;
+		color: $text-hover !important;
+	}
+
+}
+
+
+
+
+
+/**
+ * Font Mixins
+ */
+@mixin font-relation($size) {
+	$size-px : $size * 1px;
+	$size-rem : $size * .1rem;
+
+	font-size: $size-px;
+	//font-size: $size-rem;
+
+	a, p, span, strong, em, i, b {
+		font-size: $size-px;
+		//font-size: $size-rem;
+	}
+
+}

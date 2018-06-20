@@ -1,0 +1,62 @@
+
+
+form {
+
+	input {
+		border-radius: $size-5 * 1px;
+		margin: 0 5px;
+		width: 100%;
+	}
+
+	textarea {
+		border-radius: $size-5 * 1px;
+		margin: 0 5px;
+	}
+
+
+
+
+
+
+	/**
+	 * Genesis Comment Form Styles
+	 */
+
+	&.comment-form {
+
+		input[type="email"], input[type="text"], input[type="url"]
+
+		input, input[type="email"], input[type="text"], input[type="url"] {
+			@include grid_render(18/25, true);
+			@include mobile {
+				@include grid_render(11/20, true);
+				float: right;
+			}
+			float: right;
+			clear: both;
+			@include margin($margin-small, 0);
+		}
+		label {
+			@include grid_render(1/4, true);
+			@include mobile {
+				@include grid_render(21/50, true);
+				float: right;
+			}
+			float: right;
+			@include font-relation(24);
+			@include margin(0);
+		}
+		span.required {
+			@include grid_render(3/100, true);
+			float: right;
+			@include font-relation(24);
+			color: $headline-alt-color;
+		}
+
+		.comment-form-comment textarea {
+			clear: both;
+			float: none;
+		}
+
+	}
+}

@@ -1,0 +1,72 @@
+<!-- views/scripts/list.ajax.phtml should contain something like the following -->
+<?php
+  $items = json_encode($this->items);
+  //$auth = Zend_Auth::getInstance();
+  //$role = $auth->getIdentity()->role;
+?>
+<div id="itemGrid" ></div>
+
+<script>
+var grid;
+var dataView= new Slick.Data.DataView();
+var items = <?= $items ?>;
+var RowNumberFormatter = function(row, cell, value, columnDef,dataContext) {
+    return row + 1;
+};
+  var columns = [
+    {id: "rowNumber", name:"", field: "", formatter:RowNumberFormatter, width:60, cannotTriggerInsert:true, resizable:false, unselectable:true, sortable:false, enableColumnReorder: true},
+    {id: "name", name: "Campaign", field: "name", width: 220, sortable: true, enableColumnReorder: true, formatter: Slick.Formatters.CampaignLink},
+    {id: "locale", name: "Locale", field: "locale", width: 120, sortable: true, enableColumnReorder: true},
+//    {id: "fname", name: "First", field: "fname", width: 60, sortable: true, enableColumnReorder: true},
+    {id: "lname", name: "Name", field: "lname", width: 160, sortable: true, enableColumnReorder: true, formatter: Slick.Formatters.NameFormatter},
+    {id: "email", name: "Email", field: "email", width: 180, sortable: true, enableColumnReorder: true},
+    {id: "phone", name: "Phone", field: "phone", width: 120, sortable: true, enableColumnReorder: true},
+//    {id: "package", name: "Package", field: "package", width: 120, sortable: true, enableColumnReorder: true},
+    {id: "sign_limit", name: "Limit", field: "sign_limit", width: 80, sortable: true, enableColumnReorder: true},
+    {id: "date_end", name: "End", field: "date_end", width: 80, sortable: true, enableColumnReorder: true, formatter: Slick.Formatters.EndFormatter},
+    {id: "actions", name: "Actions", width: 80, sortable: false, enableColumnReorder: true, formatter: Slick.Formatters.CampaignActions}
+//    {id: "actions", name: "Actions", width: 200, sortable: false, formatter: Slick.Formatters.ActionOptions}
+  ];
+  
+  var options = {
+    rowHeight: 40,
+    enableCellNavigation: false,
+    enableColumnReorder: false,
+    multiColumnSort: true
+  };
+
+  $(function () {
+   
+    dataView.beginUpdate();
+        dataView.setItems(items, 'campaign_id');
+    dataView.endUpdate();
+
+    grid = new Slick.Grid($("#itemGrid"), dataView, columns, options);
+    
+    grid.onSort.subscribe(function (e, args) {
+        console.log("testing");
+        var cols = args.sortCols;
+
+        dataView.sort(function (dataRow1, dataRow2) {
+            for (var i = 0, l = cols.length; i < l; i++) {
+            var field = cols[i].sortCol.field;
+            var sign = cols[i].sortAsc ? 1 : -1;
+            var value1 = dataRow1[field], value2 = dataRow2[field];
+            var result = (value1 == value2 ? 0 : (value1 > value2 ? 1 : -1)) * sign;
+            if (result != 0) {
+                return result;
+            }
+            }
+            return 0;
+        });
+        grid.invalidate();
+        grid.render();
+        
+        
+    });
+    
+
+  })
+</script>
+
+

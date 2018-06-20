@@ -1,0 +1,13 @@
+
+.button-primary {
+	@include generate_button_styles($primary, $white, $tertiary, $white);
+}
+
+
+.button-secondary {
+	@include generate_button_styles($secondary, $white, $tertiary, $white);
+}
+
+.button-tertiary {
+	@include generate_button_styles($tertiary, $white, $white, $tertiary);
+}

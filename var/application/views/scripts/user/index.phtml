@@ -1,0 +1,84 @@
+<?= $this->headScript() ?> 
+<?php 
+$accounts=$this->accounts;
+?>
+<table id="page-options"><tr style="height:40px;"><td>
+<div class="row-fluid header" id="layout-header" >
+
+           
+
+                <div class="filters pull-left">
+                    
+                
+                    </div>
+                   <div id="content-options" class="pull-right">
+                         
+    <a class="btn dropdown-toggle btn-primary pull-right btn-add" href="javascript:show_add()">
+    <i class="icon-plus icon-white"></i>&nbsp;<span id="btn-add">Add Team Member</span>
+    </a>
+    </div>
+                   </div>
+            </div>  
+            </td></tr><tr><td>
+&nbsp;            
+        </td></tr></table>
+    <div id="tabs-1" class="tab-content clearfix">
+<!--        <div class="nav-options"><button style="height:30px;padding:5px 10px;" class="medium" id="btn-user-add"><span class="icon" data-icon="+"></span>Add User</button></div>-->
+            <div id="grid-users" >
+                <div id="userGrid" ></div>
+            </div>
+
+
+
+    </div>
+<div id="addModal" data-backdrop="static" class="modal hide fade center600" style="max-width:700px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel"></h3>
+  </div>
+    <div class="modal-body">
+    <div class="row-fluid"> 
+    	<div class="span4">
+        	<label>First</label>
+            <input id="input-fname" maxlength="50" type="text" class="span11 limited-text" placeholder="First Name">
+        </div>
+        
+        <div class="span4">
+        	<label>Last</label>
+            <input id="input-lname" maxlength="50" type="text" class="span11 limited-text" placeholder="Last Name">
+        </div>
+        <div class="span4">
+        	<label>Email</label>
+            <input id="input-username" maxlength="100" type="text" class="span11 limited-text" placeholder="Email Address">
+        </div>
+    </div>
+      <div class="row-fluid">
+        
+          <div class="span4">
+        	<label>Phone</label>
+            <input type="text" style="width:auto;" name="input-area" id="input-area" maxlength="3" size="3" /> -
+            <input type="text" style="width:auto;" name="input-phone1" id="input-phone1" maxlength="3" size="3" /> -
+            <input type="text" style="width:auto;" name="input-phone2" id="input-phone2" maxlength="4" size="5" />
+        </div>
+      </div>
+        
+    </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button class="btn btn-primary" id="btn-update" onclick="addUser();">Add Team Member</button>
+  </div>
+</div>
+<!-- modaleDeleteUser -->
+<div id="deleteModal" style="height:120px !important;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Delete Team Member</h3>
+  </div>
+  <div class="modal-body">
+    <p id="msg-user-delete"></p>
+  </div>
+  <div class="modal-footer">  
+    <button class="btn" data-dismiss="modal" aria-hidden="true">No, Cancel Delete</button>
+    <button class="btn btn-primary" onclick="confirmDelete();">Yes, Delete</button>
+  </div>
+</div><!--Delete Modal-->

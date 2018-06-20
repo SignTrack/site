@@ -1,0 +1,23 @@
+.sidebar {
+	background: $tertiary;
+	border-radius: 3px;
+
+	.widget {
+		h1, h2, h3, h4, h5, h6 {
+			color: $headline-alt-color;
+			font-weight: 900;
+		}
+		// margin: 13px;
+		@include margin($margin);
+		// padding: 13px;
+		@include padding($padding);
+		border-radius: 3px;
+		background: $primary;
+	}
+
+	a {
+		&:hover {
+			color: $tertiary;
+		}
+	}
+}

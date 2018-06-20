@@ -1,0 +1,44 @@
+.featured-content .entry {
+	border-bottom: none;
+	@include margin_dir($margin-large, 'bottom');
+	@include padding_dir($padding-large, 'bottom');
+}
+
+
+
+.comment-respond, .entry-comments, .entry-pings {
+	background: $white;
+}
+
+
+#inner {
+	background: $white;
+}
+
+
+body {
+	&.body-hero-image {
+		background-repeat: no-repeat;
+		//background-position-x: center;
+		background-size: cover;
+
+		&.body-hero-parallax {
+			background-attachment: fixed;
+		}
+
+		#header {
+			background: rgba($white , 0);
+			min-height: $size-13 * 1px;
+			@include padding_dir($size-11, 'top');
+		}
+	}
+}
+
+.entry-content ul {
+	@include mobile {
+		margin-left: 0;
+	}
+	@include tablet {
+		margin-left: 5px;
+	}
+}

@@ -1,0 +1,153 @@
+/**
+ * Color Variables
+ */
+
+
+$white: #f3f3f3;
+$grey: #dddddd;
+$black: #333;
+
+$teal : #2bb8e6;
+$yellow : #ff9c00;
+$orange : #ff5b22;
+$blue : #268fe0;
+$green : #21a339;
+$purple: #af48ef;
+
+$dark-blue: darken($blue, 20%);
+
+
+$primary: $teal;
+$secondary: $green;
+$tertiary: $black;
+
+
+/*
+$white: #333;
+$grey: #9a9a9a;
+$black: #eee;
+
+$primary: #B8FFBD;
+$secondary: #CC6B14;
+$tertiary: #5319FF;
+*/
+
+
+/*
+$white: #fff;
+$grey: #666;
+$black: #000;
+
+$primary: #80B2A4;
+$secondary: #FFD04B;
+$tertiary: #A8DEE5;
+*/
+
+
+
+$primary-light: lighten($primary, 20%);
+$secondary-light: lighten($secondary, 20%);
+$tertiary-light: lighten($tertiary, 20%);
+
+$primary-dark: darken($primary, 20%);
+$secondary-dark: darken($secondary, 20%);
+$tertiary-dark: darken($tertiary, 20%);
+
+
+/**
+ * Grid Variables
+ */
+$max_gutter: 89px;
+$min_gutter: 13px;
+$increment : $max_gutter - $min_gutter;
+
+$screen_size : 1400px;
+$smallest_screen: 480px;
+$smallest_div: 120px;
+
+
+
+
+/**
+ * Font Variables
+ */
+
+$base-font-size: 10;
+$text-size: $base-font-size * 1.6;
+$bold-weight: 800;
+$thin-weight: 300;
+
+
+
+/**
+ * General Text
+ */
+$text-color: $black;
+
+$link-color: $secondary;
+$link-hover-color : $primary;
+
+
+$headline-color: $primary;
+$headline-alt-color: $secondary;
+
+
+/**
+ * Responsive Breaks
+ */
+
+$break1: 1824px;
+$break2: 1170px;
+$break3: 1024px;
+$break4: 960px;
+$break5: 768px;
+$break6: 600px;
+$break7: 480px;
+$break8: 360px;
+$break9: 240px;
+
+
+/**
+ * Sizes
+ */
+
+$size-1 : 1;
+$size-2 : 2;
+$size-3 : 3;
+$size-4 : 5;
+$size-5 : 8;
+$size-6 : 13;
+$size-7 : 21;
+$size-8 : 34;
+$size-9 : 55;
+$size-10 : 89;
+$size-11 : 144;
+$size-12 : 233;
+$size-13 : 377;
+
+
+/**
+ * Padding Variables
+ */
+
+$padding-xxs : $size-3;
+$padding-xs : $size-4;
+$padding-small : $size-5;
+$padding : $size-6;
+$padding-large : $size-7;
+$padding-xl : $size-8;
+$padding-xxl : $size-9;
+$padding-xxxl : $size-10;
+
+
+/**
+ * Margin Variables
+ */
+
+$margin-xxs : $size-3;
+$margin-xs : $size-4;
+$margin-small : $size-5;
+$margin : $size-6;
+$margin-large : $size-7;
+$margin-xl : $size-8;
+$margin-xxl : $size-9;

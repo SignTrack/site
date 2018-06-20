@@ -1,0 +1,15 @@
+
+ul, ol {
+	li {
+		// margin-left: 34px;
+		@include margin_dir($margin-xl, 'left');
+	}
+}
+
+ul {
+	list-style-type: square;
+}
+
+ol {
+	list-style-type: decimal;
+}

@@ -1,0 +1,43 @@
+.widely-header-sidebar {
+
+	#nav {
+		background-color: transparent;
+
+		.menu-primary { // ul
+			// padding: 13px 0;
+			@include padding($padding, 0);
+			flex-direction: column;
+			.menu-item { // li
+				margin: 0;
+				background: $tertiary;
+				&.current-menu-item {
+					background: $secondary;
+				}
+				border-bottom: solid 2px $secondary;
+				&:nth-child(1) {
+					border-top: solid 2px $secondary;
+				}
+
+				&:hover {
+					background: $white;
+					a {
+						color: $tertiary;
+					}
+					>.sub-menu {
+						position: fixed;
+						left: 100%;
+						top: 0;
+					}
+				}
+
+				a {
+					@include font-relation(18);
+					width: 100%;
+					// padding: 13px;
+					@include padding($padding);
+					//@extend .button-tertiary;
+				}
+			}
+		}
+	}
+}

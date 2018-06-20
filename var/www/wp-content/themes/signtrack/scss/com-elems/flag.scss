@@ -1,0 +1,63 @@
+/**
+ *
+ *		.flag
+ *   ******************************************************************
+ *   *                                                                *
+ *   *     .flag-stars                 .flag-stripes                  *
+ *   *    *****************         ******************************    *
+ *   *    *               *         *                            *    *
+ *   *    *               *         *                            *    *
+ *   *    *               *         *                            *    *
+ *   *    *               *         *                            *    *
+ *   *    *               *         *                            *    *
+ *   *    *               *         *                            *    *
+ *   *    *               *         *                            *    *
+ *   *    *               *         *                            *    *
+ *   *    *               *         *                            *    *
+ *   *    *****************         ******************************    *
+ *   *                                                                *
+ *   *                                                                *
+ *   ******************************************************************
+ *
+ */
+
+
+
+.flag {
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	flex-flow: space-around;
+	justify-content: center;
+
+	&.flag-reverse {
+		flex-direction: row-reverse;
+		@include mobile {
+			flex-direction: column;
+		}
+	}
+
+	.flag-stars {
+		@extend .grid-1-3rd;
+		@include padding($padding);
+		float: none;
+		text-align: center;
+		align-self: center;
+		img {
+			max-width: 100%;
+		}
+	}
+
+	.flag-stripes {
+		@extend .grid-2-3rds;
+		@include padding($padding);
+		float: none;
+		align-self: center;
+	}
+
+	@include mobile {
+		flex-direction: column;
+	}
+
+}

@@ -1,0 +1,289 @@
+body {
+	background: $white;
+	#wrap {
+		//width: 100%;
+	}
+}
+
+#header {
+	min-height: 20vh;
+}
+
+#inner {
+	min-height: 60vh;
+}
+
+#footer {
+	min-height: 20vh;
+}
+
+.menu-primary.genesis-nav-menu {
+	display: flex;
+}
+
+
+#header .wrap {
+	overflow: hidden;
+	#title-area {
+		@extend .grid-1-3rd-strict;
+		@extend .grid-size-always;
+	}
+	.header-widget-area {
+		@extend .grid-2-3rds-strict;
+		@extend .grid-size-always;
+		text-align: right;
+	}
+}
+
+.header-right-nav {
+	#nav {
+		.wrap {
+			width: 100%;
+		}
+	}
+}
+
+
+/**
+ * Trying to get the default Genesis layout to work
+ */
+
+/* #inner {
+	margin-top: 55px;
+} */
+
+.full-width-content {
+	#content-sidebar-wrap {
+		width: 100%;
+	}
+	#content {
+		@extend .grid-1-strict;
+		float: none;
+	}
+}
+
+.content-sidebar {
+	#content-sidebar-wrap {
+		width: 100%;
+	}
+	#content {
+		@extend .grid-2-3rds-strict;
+		float: left;
+	}
+
+	#sidebar {
+		@extend .grid-1-3rd-strict;
+		float: left;
+	}
+}
+
+.sidebar-content {
+	#content-sidebar-wrap {
+		width: 100%;
+	}
+	#content {
+		@extend .grid-2-3rds-strict;
+		float: right;
+	}
+
+	#sidebar {
+		@extend .grid-1-3rd-strict;
+		float: right;
+	}
+}
+
+.content-sidebar-sidebar {
+	#content-sidebar-wrap {
+		overflow: hidden;
+		@extend .grid-3-4ths-strict;
+		#content {
+			@extend .grid-2-3rds-strict;
+			float: left;
+		}
+
+		#sidebar {
+			@extend .grid-1-3rd-strict;
+			float: left;
+		}
+	}
+	#sidebar-alt {
+		@extend .grid-1-4th-strict;
+	}
+
+	@include page_width(5) {
+		#sidebar-alt, #content-sidebar-wrap {
+			@include grid_render(1, true);
+			float: none;
+		}
+	}
+	@include page_width(6) {
+		#sidebar-alt, #content-sidebar-wrap {
+			@include grid_render(1, true);
+			float: none;
+		}
+	}
+	@include mobile {
+		#sidebar-alt, #content-sidebar-wrap {
+			@include grid_render(1, true);
+			float: none;
+		}
+
+	}
+
+
+
+}
+
+.sidebar-sidebar-content {
+	#content-sidebar-wrap {
+		overflow: hidden;
+		@extend .grid-3-4ths-strict;
+		float: right;
+		#content {
+			@extend .grid-2-3rds-strict;
+			float: right;
+		}
+
+		#sidebar {
+			@extend .grid-1-3rd-strict;
+			float: right;
+		}
+	}
+	#sidebar-alt {
+		@extend .grid-1-4th-strict;
+		float: right;
+	}
+
+	@include page_width(5) {
+		#sidebar-alt, #content-sidebar-wrap {
+			@include grid_render(1, true);
+			float: none;
+		}
+	}
+	@include page_width(6) {
+		#sidebar-alt, #content-sidebar-wrap {
+			@include grid_render(1, true);
+			float: none;
+		}
+	}
+	@include mobile {
+		#sidebar-alt, #content-sidebar-wrap {
+			@include grid_render(1, true);
+			float: none;
+		}
+
+	}
+
+}
+
+
+.sidebar-content-sidebar {
+	#content-sidebar-wrap {
+		overflow: hidden;
+		@extend .grid-3-4ths-strict;
+		float: right;
+		#content {
+			@extend .grid-2-3rds-strict;
+			float: left;
+		}
+
+		#sidebar {
+			@extend .grid-1-3rd-strict;
+			float: left;
+		}
+	}
+	#sidebar-alt {
+		@extend .grid-1-4th-strict;
+		float: right;
+	}
+
+	@include page_width(5) {
+		#sidebar-alt, #content-sidebar-wrap {
+			@include grid_render(1, true);
+			float: none;
+		}
+	}
+	@include page_width(6) {
+		#sidebar-alt, #content-sidebar-wrap {
+			@include grid_render(1, true);
+			float: none;
+		}
+	}
+	@include mobile {
+		#sidebar-alt, #content-sidebar-wrap {
+			@include grid_render(1, true);
+			float: none;
+		}
+
+	}
+
+}
+
+
+
+/**
+* Header Sidebar Styles
+*/
+
+.widely-header-sidebar {
+	//padding-top: 34px;
+	@extend .grid-1-4th-strict;
+
+	.wrap {
+		width: 100%;
+	}
+
+	#title-area {
+		@extend .grid-1;
+		float: none;
+		text-align: center;
+	}
+
+	.widget-area {
+		@extend .grid-1;
+		float: none;
+	}
+
+	.genesis-nav-menu {
+		flex-direction: column;
+	}
+}
+
+
+.widely-header-sidebar-content {
+	//padding-top: 34px;
+	@extend .grid-3-4ths-strict;
+
+	#inner {
+		width: 100%;
+	}
+	.widely-inner-container {
+		width: 100%;
+	}
+
+	#footer {
+		.wrap {
+			width: 100%;
+		}
+	}
+}
+
+
+#header, #inner {
+	// padding: 55px 0;
+	@include padding($padding-xl, 0);
+}
+
+#inner {
+	@include mobile {
+		// padding-top: 100px;
+		@include padding(144, 0);
+
+	}
+
+	@include page-width(6) {
+		// padding-top: 100px;
+		@include padding(144, 0);
+
+	}
+}

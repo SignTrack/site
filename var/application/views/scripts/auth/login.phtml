@@ -1,0 +1,14 @@
+<div id="login-form">
+<form class="form-signin" autocomplete="off" method="POST" action="<?php echo $this->baseUrl();?>/login">
+<!--    	<img src="<?php echo $this->baseUrl();?>/images/login-logo.png" alt="charlie palmer group cms" />-->
+<!--        <img src="<?php echo $this->baseUrl();?>/images/logo-g.png"/>-->
+    <img src="<?php echo $this->baseUrl();?>/images/logo_w.png" style="height:50px;margin-bottom: 30px;"/>
+    <?php
+        echo $this->msg;
+        ?>
+        <label>Email</label>
+        <input type="text" style="margin-bottom:0 !important;" maxlength="100" id="username" name="username" class="input-block-level" placeholder="Email Address">
+         <label style="margin-top:10px;">Password</label>
+        <input type="password" style="margin-bottom:20px !important;" maxlength="500" id="password" name="password" class="input-block-level" placeholder="Password">
+        <button class="btn btn-primary" type="submit">Login</button><a style="float:right" href="<?= $this->baseUrl()?>/auth/reset">Forgot password?</a>
+</form></div>

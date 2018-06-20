@@ -1,0 +1,47 @@
+#footer.footer {
+	background: $primary;
+	color: $white;
+
+	.wrap {
+		@include padding($padding);
+	}
+
+
+	.widely-footer-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		flex-flow: space-around;
+		justify-content: center;
+
+		@include mobile {
+			flex-direction: column;
+		}
+
+		.footer-widget {
+			flex-grow: 1;
+			align-self: center;
+			@include padding($padding);
+			color: $white;
+
+			h1, h2, h3, h4, h5, h6 {
+				color: $headline-alt-color;
+				a {
+					color: $headline-alt-color !important;
+				}
+			}
+		}
+
+	}
+
+	.widely-footer {
+		text-align: center;
+		color: $primary;
+		background: #000;
+		@include padding($padding-small, 0);
+		@include font-relation(16);
+		img {
+			max-height: 20px;
+		}
+	}
+}

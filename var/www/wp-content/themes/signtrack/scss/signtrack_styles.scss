@@ -1,0 +1,418 @@
+body.body-hero-image #header {
+    @include padding_dir($padding-large, 'top');
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+    @include padding_dir(0, 'left');
+}
+
+
+#header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    .wrap {
+        #title-area {
+            @extend .grid-1-2;
+            min-width: 50%;
+            .homepage-header-left-container {
+                width: 85%;
+                margin: 0 auto;
+                background: rgba(0,94,148,.5);
+                border-radius:13px;
+                padding:0;
+                @include padding_dir(89, 'bottom');
+                position: relative;
+
+                .logo {
+                    text-align: center;
+                }
+                .caption {
+                    text-align: center;
+                    color: $white;
+                    h1, h2, h3, h4, h5, h6 {
+                        color: $white;
+                    }
+                }
+
+                // ----- Ribbon styles
+
+                .ribbon {
+                    padding: .34em 1em;
+            		margin: 0 auto;
+            		margin-top: 5%;
+            		position:absolute;
+                    bottom: 21px;
+                    left: -2%;
+            		text-align: center;
+            		box-shadow: inset 0px 1px 0px rgba($white,.3),
+            					inset 0px 0px 20px rgba($black,0.1),
+            					0px 1px 1px rgba($black,0.4);
+            		 background: -webkit-linear-gradient(top,$dark-blue, lighten($dark-blue, 10%));
+                     width: 104%;
+                    &:before, &:after {
+                        content: "";
+                        width:.5em;
+                        top:-1em;
+                        position:absolute;
+                        display:block;
+                        border: .9em solid lighten($dark-blue, 10%);
+                        box-shadow:0px 1px 0px rgba($black,0.4);
+                        z-index:-2;
+                        @include font-relation(16);
+                    }
+
+                    &:before {
+                        left:-1.35em;
+            		    border-right-width: 1em;
+            	    	border-left-color:transparent;
+                    }
+                    &:after {
+                        right:-1.35em;
+            		    border-left-width: 1em;
+            	    	border-right-color:transparent;
+                    }
+
+                    .ribbon-content {
+                        h1, h2, h3, h4, h5, h6 {
+                            color: $white;
+                            text-transform: uppercase;
+                            margin: 0;
+                            padding: 0;
+                            @include padding_dir($padding-xs, 'top');
+                        }
+                        &:before, &:after {
+                            content:"";
+            	        	top:-1em;
+            	        	position:absolute;
+            	        	display:block;
+            	        	border-style:solid;
+            	        	border-color: transparent $dark-blue transparent $dark-blue;
+            	        	z-index:-1;
+                        }
+
+                        &:before {
+                            left: 0;
+                            border-width: 1em 1em 0 0;
+                        }
+                        &:after {
+                            right: 0;
+                            border-width: 1em 0 0 1em;
+                        }
+                    }
+                }
+
+
+
+                // ----- End of Ribbon Styles
+
+
+            }
+        }
+
+        .widget-area.header-widget-area {
+            @extend .grid-1-2;
+            text-align: center;
+            padding-bottom: 0;
+            > div {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+}
+
+
+#inner {
+    @include mobile {
+        @include padding_dir(0, 'top');
+    }
+    @include tablet {
+        @include padding_dir(0, 'top');
+    }
+    @include padding_dir(0, 'bottom');
+    >.widely-inner-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        > div {
+            padding: 0;
+        }
+        #content {
+            padding: 0;
+            .entry-content {
+                padding: 0;
+
+                .section {
+                    text-align: center;
+                    @include padding(0);
+                    h1, h2, h3, h4, h5, h6 {
+                        @include padding($padding);
+                        @include padding_dir(0, 'left');
+                        @include padding_dir(0, 'right');
+                    }
+                    .section-contain {
+                        @extend .widely-inner-container;
+                        @include padding($padding-large, $padding-xxl);
+
+                        .righttext {
+                            @include mobile {
+                                text-align: center;
+                            }
+                        }
+                        > p.contained {
+                            @include padding($padding-xl);
+                            @include monitor {
+                                width: 50%;
+                                margin: 0 auto;
+                            }
+                        }
+
+                        > h1, > h2, > h3, > h4, > h5, > h6 {
+                            text-transform: uppercase;
+                        }
+
+                        .grid-1-2 {
+                            h1, h2, h3, h4, h5, h6 {
+                                color: $text-color;
+                            }
+                        }
+                        .grid-1-3rd {
+                            text-align: center;
+                        }
+                        li {
+                            text-align: left;
+                        }
+                    }
+                    .section-empty {
+                        @include padding(0);
+                    }
+
+
+
+                    // ----- Plan Cards
+
+                    .plan-card {
+                        background: $white;
+                        line-height: 1;
+                        h1, h2, h3, h4, h5, h6, div, p {
+                            color: $text-color !important;
+                            margin: 0 auto;
+                        }
+                        .plan-title {
+                            font-weight: 400;
+                        }
+                        .plan-limit {
+                            h3.limit-number {
+                                transform:scale(1,1.6);
+                                font-weight: 400;
+                                @include font-relation(50);
+                                @include padding_dir(0, 'top');
+                                @include padding_dir(0, 'bottom');
+                            }
+                            p {
+                                text-transform: uppercase;
+                            }
+                        }
+                        .plan-price {
+                            .button {
+                                width: 80%;
+                                margin: 0 auto;
+                                @include font-relation(20);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+     }
+}
+
+
+.section.teal {
+    background: $teal;
+    h1, h2, h3, h4, h5, h6, div, p {
+        color: $white;
+        margin: 0 auto;
+    }
+}
+
+.section.yellow {
+    background: $yellow;
+    h1, h2, h3, h4, h5, h6, div, p {
+        color: $white;
+        margin: 0 auto;
+    }
+}
+
+.section.orange {
+    background: $orange;
+    h1, h2, h3, h4, h5, h6, div, p {
+        color: $white;
+        margin: 0 auto;
+    }
+}
+
+.section.blue {
+    background: $blue;
+    h1, h2, h3, h4, h5, h6, div, p {
+        color: $white;
+        margin: 0 auto;
+    }
+}
+
+.section.green {
+    background: $green;
+    h1, h2, h3, h4, h5, h6, div, p {
+        color: $white;
+        margin: 0 auto;
+    }
+}
+
+.section.grey {
+    background: $grey;
+    h1, h2, h3, h4, h5, h6, div, p {
+        margin: 0 auto;
+    }
+}
+
+.section.black {
+    background: #000;
+    h1, h2, h3, h4, h5, h6, div, p {
+        color: $white;
+        margin: 0 auto;
+    }
+}
+
+
+
+
+
+#footer {
+    min-height: 1vh;
+}
+
+
+
+
+
+
+#entry-content .button.button-yellow, .button.button-yellow {
+	@include generate_button_styles($yellow, $white, $grey, $black);
+}
+#entry-content .button.button-orange, .button.button-orange {
+	@include generate_button_styles($orange, $white, $grey, $black);
+}
+#entry-content .button.button-purple, .button.button-purple {
+	@include generate_button_styles($purple, $white, $grey, $black);
+}
+#entry-content .button.button-blue, .button.button-blue {
+	@include generate_button_styles($blue, $white, $grey, $black);
+}
+
+
+var {
+    color: $orange;
+}
+
+
+@include mobile {
+    #header .wrap {
+        #title-area {
+            width: 100% !important;
+            float: none !important;
+            .homepage-header-left-container {
+                @include padding_dir(89, 'bottom');
+                .ribbon {
+                    bottom: 13px;
+                }
+            }
+        }
+    }
+    .header-widget-area {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto;
+        float: none !important;
+    }
+}
+
+@include tablet {
+    #title-area {
+        width: 100% !important;
+        float: none !important;
+    }
+    .header-widget-area {
+        margin: 0 auto;
+        float: none !important;
+    }
+
+}
+
+
+// ------
+
+.single, .single-product, .woocommerce-page {
+    #inner {
+        overflow: hidden;
+        @extend .widely-inner-container;
+        @include padding($padding-large, $padding-xxl);
+        #container {
+            @extend .grid-3-4ths;
+            button {
+                @include generate_button_styles($blue, $white, $grey, $black);
+            }
+        }
+        #sidebar {
+            @extend .grid-1-4th;
+            .woocommerce {
+                .buttons {
+                    .button {
+                        @include generate_button_styles($secondary, $white, $grey, $black);
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.woocommerce a.button {
+    @extend .button-blue;
+}
+
+.woocommerce input.button.alt, .woocommerce a.button.alt {
+    @include generate_button_styles($blue, $white, $grey, $black);
+}
+
+
+.woocommerce-tabs {
+    display: none;
+}
+
+.woocommerce {
+    @include mobile {
+        //overflow: scroll;
+        .cart_totals {
+            width: 200%;
+            .wc-proceed-to-checkout {
+                width: 200%;
+            }
+        }
+    }
+    &.single-product form .quantity {
+        //display: none;
+    }
+}
+
+
+.woocommerce-cart {
+    #inner {
+        @include padding($size-3);
+    }
+
+    .cart-collaterals .cart_totals table th {
+        width: 50%;
+    }
+}

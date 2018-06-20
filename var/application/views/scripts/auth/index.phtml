@@ -1,0 +1,33 @@
+<!--<div id="view-content">
+  
+        <form id="form-login" method="POST" action="<?php echo $this->baseUrl();?>/login">
+             <fieldset>
+            
+            <label>Username</label>
+            <input type="text" id="username" name="username"/>
+            <label>Password</label>
+            <input type="password" id="password" name="password"/>
+            <input type="checkbox" name="remember" value="yes"><label>&nbsp;&nbsp;Keep me logged in</label>
+            <p><input type="submit" class="medium" value="Submit"/></p>
+            <p><a href="<?= $this->baseUrl()?>/forgot">Forgot password?</a></p>
+             </fieldset>
+        </form>
+
+</div>-->
+<div class="container-fluid">
+
+
+<form class="form-signin" id="form-login" method="POST" action="<?php echo $this->baseUrl();?>/login">
+    	<img src="<?php echo $this->baseUrl();?>/images/logo-g.png" alt="charlie palmer group cms" />
+        <p>HARLAN CPA</p>
+        <h1>Website Content Management System</h1>
+        <input type="text" id="username" class="input-block-level" placeholder="Email Address">
+        <input type="password" id="password" class="input-block-level" placeholder="Password">
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me">&nbsp;Remember my Email Address</label>          
+        <button class="btn btn-primary" type="submit">Login</button>
+        <a href="<?= $this->baseUrl()?>/forgot">Forgot Password</a>
+</form>
+    
+ 
+</div><!--container-fluid-->

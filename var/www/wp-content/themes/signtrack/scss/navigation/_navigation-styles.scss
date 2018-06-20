@@ -1,0 +1,122 @@
+
+#nav {
+	background-color: $tertiary;
+
+	.menu-primary { // ul
+
+		.menu-item { // li
+			margin-left: 0;
+			background: $tertiary;
+			flex-grow: 1;
+			position: relative;
+			&.current-menu-item {
+				background: $tertiary;
+			}
+			//border-left: solid 1px $tertiary-light;
+			&:last-child {
+				//border-right: solid 1px $tertiary-light;
+			}
+
+			&:hover {
+				background: $white;
+				a {
+					color: $tertiary;
+				}
+			}
+			a {
+				@include font-relation(16);
+				color: $white;
+				// padding: 21px 55px;
+				@include padding($padding, $padding-large);
+				text-align: center;
+			}
+
+
+
+
+			.sub-menu {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				.menu-item { // li
+					margin-left: 0;
+					background: $tertiary;
+					flex-grow: 1;
+					a {
+						width: 100%;
+						background: transparent;
+					}
+					&.current-menu-item {
+						background: $tertiary;
+					}
+					//border-left: solid 1px $tertiary-light;
+					&:last-child {
+						//border-right: solid 1px $tertiary-light;
+					}
+
+					&:hover {
+						background: $white;
+						a {
+							color: $tertiary;
+						}
+					}
+					a {
+						@include font-relation(16);
+						color: $white;
+						// padding: 21px 55px;
+						@include padding($padding-large, $padding-xxl);
+						text-align: center;
+					}
+
+
+
+
+
+					.sub-menu {
+						width: 100%;
+						display: flex;
+						flex-direction: column;
+						.menu-item { // li
+							margin-left: 0;
+							background: $tertiary;
+							flex-grow: 1;
+							a {
+								width: 100%;
+								background: transparent;
+							}
+							&.current-menu-item {
+								background: $secondary;
+							}
+							//border-left: solid 1px $tertiary-light;
+							&:last-child {
+								//border-right: solid 1px $tertiary-light;
+							}
+
+							&:hover {
+								background: $white;
+								a {
+									color: $tertiary;
+								}
+							}
+							a {
+								@include font-relation(16);
+								color: $white;
+								// padding: 21px 55px;
+								@include padding($padding-large, $padding-xxl);
+								text-align: center;
+							}
+
+						}
+					}
+				}
+			}
+
+		}
+	}
+}
+
+#nav.fixed {
+	position: fixed;
+	top: 0;
+	width: 100%;
+}

@@ -1,0 +1,117 @@
+<!-- views/scripts/list.ajax.phtml should contain something like the following -->
+<?php
+  $users = json_encode($this->users);
+?>
+
+<script>
+var grid;
+var dataView= new Slick.Data.DataView();;
+var users = <?= $users ?>;
+var RowNumberFormatter = function(row, cell, value, columnDef,dataContext) {
+    return row + 1;
+};
+  var columns = [
+//    {id: "edit_btn", name: "Edit", field: "id", width: 50, formatter: Slick.Formatters.ButtonEdit},
+    {id: "rowNumber", name:"", field: "", formatter:RowNumberFormatter, width:60, cannotTriggerInsert:true, resizable:false, unselectable:true, sortable:false, enableColumnReorder: true},
+    {id: "fname", name: "First", field: "fname", width: 80, sortable: true},
+    {id: "lname", name: "Last", field: "lname", width: 80, sortable: true},
+    {id: "username", name: "Email Address", field: "username", width: 200, sortable: true},
+    {id: "phone", name: "Phone", field: "phone", width: 140, sortable: true},
+//    {id: "user_id", name: "Options", field: "user_id", width: 100, formatter: Slick.Formatters.UserOptions},
+//    {id: "role", name: "Role", field: "role", width: 240, sortable: true},
+//    {id: "role", name: "User Type", field: "role", width: 100, sortable: true},
+    {id: "last_login", name: "Last Login", field: "last_login", width: 160, sortable: true, formatter: Slick.Formatters.LastLoginFormatter},
+    {id: "registered", name: "Added", field: "registered", width: 160, sortable: true, formatter: Slick.Formatters.AddedFormatter},
+    
+    {id: "actions", name: "Actions", width: 140, sortable: false, formatter: Slick.Formatters.UserOptions}
+//    {id: "registered", name: "Registered", field: "registered", width: 240, sortable: true, formatter: Slick.Formatters.AddedDate},
+//    {id: "last_login", name: "Last Login", field: "last_login", width: 240, sortable: true, formatter: Slick.Formatters.UpdatedDate}
+//    {id: "delete_btn", name: "Delete", field: "id", width: 50, formatter: Slick.Formatters.ButtonDelete}
+  ];
+
+  var options = {
+    rowHeight: 40,
+    enableCellNavigation: false,
+    enableColumnReorder: false,
+    multiColumnSort: true
+  };
+
+  $(function () {
+   
+    dataView.beginUpdate();
+        dataView.setItems(users, 'user_id');
+    dataView.endUpdate();
+
+    grid = new Slick.Grid($("#userGrid"), dataView, columns, options);
+    
+    grid.onSort.subscribe(function (e, args) {
+        console.log("testing");
+        var cols = args.sortCols;
+
+        dataView.sort(function (dataRow1, dataRow2) {
+            for (var i = 0, l = cols.length; i < l; i++) {
+            var field = cols[i].sortCol.field;
+            var sign = cols[i].sortAsc ? 1 : -1;
+            var value1 = dataRow1[field], value2 = dataRow2[field];
+            var result = (value1 == value2 ? 0 : (value1 > value2 ? 1 : -1)) * sign;
+            if (result != 0) {
+                return result;
+            }
+            }
+            return 0;
+        });
+        grid.invalidate();
+        grid.render();
+        
+        
+    });
+
+  })
+</script>
+<!--<script>
+  var grid,
+      data = <?= $users ?>,
+      columns = [
+        { id: "username", name: "Username", field: "username", width: 240, sortable: true },
+        { id: "role", name: "Role", field: "c1", width: 240, sortable: true },
+        { id: "c2", name: "Registered", field: "c2", width: 240, sortable: true },
+        { id: "c3", name: "Last Login", field: "c3", width: 240, sortable: true }
+      ],
+      options = {
+        enableCellNavigation: false,
+        enableColumnReorder: false
+      },
+      numberOfItems = data.length, last_login = [], username = [], role = [], registered = [], indices, isAsc = true, currentSortCol = { id: "username" }, i;
+
+  // Copies and shuffles the specified array and returns a new shuffled array.
+
+
+  /// Build the items and indices.
+
+  for (i = numberOfItems; i-- > 0;) {
+    last_login[i] = data[i].last_login;
+    username[i] = data[i].username;
+    role[i] = data[i].role;
+    registered[i] = data[i].registered;
+  }
+  indices = { username: username, c1: role, c2: registered, c3: last_login };
+
+  // Assign values to the data.
+
+
+  // Define function used to get the data and sort it.
+  function getItem(index) {
+    return isAsc ? data[indices[currentSortCol.id][index]] : data[indices[currentSortCol.id][(data.length - 1) - index]];
+  }
+  function getLength() {
+    return data.length;
+  }
+
+  grid = new Slick.Grid("#userGrid", {getLength: getLength, getItem: getItem}, columns, options);
+  grid.onSort.subscribe(function (e, args) {
+    currentSortCol = args.sortCol;
+    isAsc = args.sortAsc;
+    grid.invalidateAllRows();
+    grid.render();
+  });
+</script>-->

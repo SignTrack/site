@@ -1,0 +1,509 @@
+
+/*==================  WooCommerce ==================*/
+
+.woocommerce ul.cart_list li img, .woocommerce ul.product_list_widget li img {
+    display:none;
+}
+.grid-1-4th, .icon-group.four-icons .icon-container, .single #inner #sidebar, .single-product #inner #sidebar, .woocommerce-page #inner #sidebar {
+    padding: 0;
+    background: transparent;
+}
+.sidebar {
+    background: none repeat scroll 0% 0% #EEE;
+    border-radius: 0px;
+}
+.sidebar .widget {
+    margin: 0;
+    padding: 1.3rem;
+    border-radius: 0;
+    background: none repeat scroll 0% 0% #CCC;
+}
+.woocommerce input.button.alt, .woocommerce a.button.alt {
+    border-radius: 0;
+    border: 0;
+    background-color: #268FE0;
+}
+.woocommerce a.button, .woocommerce .cart .button, .woocommerce .cart input.button, .woocommerce-cart table.cart td.actions .coupon .input-text {
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 10px 10px !important;
+    font-size: 14px;
+    font-weight:300;
+}
+.coupon {
+    display: none;
+}
+}
+.woocommerce ul.products li.product h3, .woocommerce ul.products li.product .price{
+    padding: 0.5em 5%;
+}
+.woocommerce ul.products li.product .button {
+    margin-left: 5%;
+}
+
+.woocommerce ul.products li.product, .woocommerce-page ul.products li.product {
+    margin-bottom:40px !important;
+}
+.woocommerce h1 {
+    font-size: 42px;
+}
+
+.woocommerce h2, .woocommerce h3 {
+    font-size: 28px;
+    margin-top:24px;
+}
+#entry-content .button.button-blue:hover, #entry-content .woocommerce a.button:hover, .woocommerce #entry-content a.button:hover,
+.button.button-blue:hover, .woocommerce a.button:hover, .single #inner #container button:hover, .single-product #inner #container button:hover,
+.woocommerce-page #inner #container button:hover, .woocommerce input.button.alt:hover, .woocommerce a.button.alt:hover {
+    background-color: #0d2b5e;
+    color: #FFF!important;
+}
+
+.woocommerce-page #inner #sidebar .woocommerce .buttons .button:hover {
+    background-color: #09751d;
+    color: #FFF!important;
+}
+.sidebar li {
+    border-bottom: none;
+}
+.woocommerce .widget_shopping_cart .total, .woocommerce.widget_shopping_cart .total {
+    border-top: 3px double #EBE9EB;
+    padding: 12px 5px 8px;
+}
+#sidebar h4 {
+font-weight: 100;
+padding-left: 0;
+padding-right: 0;
+background: #333;
+padding: 5px 10px;
+text-align: center;
+color: #fff !important;
+text-transform: uppercase;
+font-size: 16px;
+font-weight: 300;
+}
+
+.woocommerce .woocommerce-message {
+    border-top-color: #21A339;
+}
+.woocommerce .woocommerce-message::before {
+    color: #21A339;
+}
+.woocommerce div.product p.price, .woocommerce div.product span.price {
+    color: #21A339;
+}
+
+.default-logo {
+    width: 100%;
+    max-width:340px !important;
+}
+
+
+a.button.wc-forward {
+    display: none !important;
+}
+
+a.button.checkout.wc-forward {
+    display: block !important;
+}
+
+/*==== WOO CART =====*/
+
+/* .product-quantity, .product-price, .product-thumbnail {
+    display: none;
+} */
+
+.product-price, .product-thumbnail {
+    display: none;
+}
+
+.woocommerce table.shop_table {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0px -1px 24px 0px;
+    width: 100%;
+    max-width:600px;
+    border-radius: 0;
+}
+.woocommerce table.shop_table td {
+    padding: 6px;
+}
+.woocommerce .cart-collaterals .cart_totals, .woocommerce-page .cart-collaterals .cart_totals {
+    float: left;
+    width: 100%;
+    max-width: 600px;
+}
+
+/*==== WOO CHECKOUT =====*/
+
+form input {
+    border-radius: 0px;
+    margin: 0px 5px;
+    width: 100%;
+}
+
+input, select, textarea {
+    font-size: 16px;
+    font-weight: 300;
+    padding: 5px 10px;
+}
+.woocommerce table.shop_table {
+    border-radius: 0px;
+}
+.select2-container .select2-choice {
+    display: block;
+    padding: 3px 10px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #CCC;
+    white-space: nowrap;
+    color: #444;
+    text-decoration: none;
+    border-radius: 0px;
+    background-clip: padding-box;
+    -moz-user-select: none;
+}
+.widget_shopping_cart_content .cart_list, .widget_shopping_cart_content .total, .widget_shopping_cart_content .buttons {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.widget_shopping_cart_content .buttons {
+    padding-bottom: 5px;
+}
+
+.woocommerce-checkout .col-2 {
+    display: none;
+}
+.woocommerce form .form-row input.input-text, .woocommerce form .form-row textarea {
+    line-height: 1.5em;
+}
+.woocommerce form .form-row label {
+    margin-top:5px;
+}
+
+#customer_details {
+    background-color: #F7F6F7;
+}
+.woocommerce-checkout #payment {
+    border-radius: 0px;
+}
+
+.payment_method_authorize_net_aim {
+    list-style-type: none !important;
+}
+
+/*==================  Global ==================*/
+
+a {font-weight:500;}
+
+ul.fa-ul {
+margin: 0 0 0 15px;
+padding: 0;
+list-style-type: none;
+}
+
+ul.fa-ul li {
+list-type: none;
+margin: 0 0 0 5px;
+padding: 5px 0 5px 0;
+list-style-type: none;
+}
+
+ol li {
+   list-type: none;
+    margin: 0 0 0 5px;
+    padding: 5px 0 5px 0;
+    list-style-type: none;
+}
+ol li:before{
+    background: red;
+    border-radius:5px;
+}
+
+.fa-li {
+    position: absolute;
+    left: -2em;
+    width: 2em;
+    top: .7em;
+    text-align: center;
+    font-size: 14px;
+}
+body, #inner {
+    background: #FFF;
+}
+
+
+/*==================  HEADER ==================*/
+
+#header .wrap #title-area .homepage-header-left-container {
+    margin-top: 40px;
+    background: none repeat scroll 0% 0% rgba(0, 94, 148, 0.8);
+}
+
+.logo {
+    padding: 20px !important;
+}
+
+/*======  RIBBON ======*/
+
+#header .wrap #title-area .homepage-header-left-container .ribbon {
+    height:43px;
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+    text-align: center;
+    background: #001e42;
+    box-shadow: none;
+    width: 100%;
+}
+#header .wrap #title-area .homepage-header-left-container .ribbon .ribbon-content h6 {
+    padding-top:0;
+}
+#header .wrap #title-area .homepage-header-left-container .ribbon::before, #header .wrap #title-area .homepage-header-left-container .ribbon::after  {
+    top: -11px;
+    width:44px;
+    height:54px;
+    position: absolute;
+    display: block;
+    border: 0;
+    box-shadow: none;
+    font-size: 1.6rem;
+
+}
+#header .wrap #title-area .homepage-header-left-container .ribbon::before {
+    background: url(../images/ribbon-tail.png) no-repeat;
+    left: -2.75em;
+}
+
+#header .wrap #title-area .homepage-header-left-container .ribbon::after {
+    background: url(../images/ribbon-tail-right.png) no-repeat;
+    right: -2.75em;
+}
+
+#header .wrap #title-area .homepage-header-left-container .ribbon .ribbon-content::before, #header .wrap #title-area .homepage-header-left-container .ribbon .ribbon-content:after {
+    display: none;
+}
+
+/*==================  NAV  ==================*/
+
+#nav {
+    background-color: #000;
+}
+
+.genesis-nav-menu a  {
+    background-color: #000;
+}
+
+#nav .menu-primary .menu-item:hover a {
+    color: #2BB8E6;
+}
+
+#nav .menu-primary .menu-item {
+    border-left: 0px;
+}
+
+#nav .menu-primary .menu-item:last-child {
+    border-right: 0px;
+}
+
+
+/*==================  Typography  ==================*/
+
+.introtext {
+    font-size: 18px !important;
+}
+.section-contain h3, .section.grey h3, .section.green h3 {
+	margin-bottom:2.4rem;
+}
+#inner > .widely-inner-container #content .entry-content .section .section-contain > h3 {
+    text-transform: none;
+    letter-spacing: -1px;
+    margin-bottom: 60px;
+}
+
+h5 {font-size: 16px !important;font-weight: bold; text-transform: uppercase;letter-spacing:-.5px;}
+
+h5.header-line {
+	text-transform: uppercase;
+	font-weight: normal !important;
+	color:#FFF !important;
+	margin-top: 10px !important;
+}
+
+#header h6 {
+    font-size: 21px;
+    font-weight: 300;
+}
+#header .ribbon-content h6 {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+p, p strong {font-size: 14px !important;line-height: 1.5em;}
+
+.entry-content p.highlight-yellow {background-color: #FF9C00;padding: 5px 10px;color:#fff;text-transform: uppercase;line-height:1.2em;}
+.entry-content p.highlight-orange {background-color: #FF5B22;padding: 5px 10px;color:#fff;text-transform: uppercase;line-height:1.2em;}
+.entry-content p.highlight-purple {background-color: #AF48EF;padding: 5px 10px;color:#fff;text-transform: uppercase;line-height:1.2em;}
+.entry-content p.highlight-blue {background-color: #268FE0;padding: 5px 10px;color:#fff;text-transform: uppercase;line-height:1.2em;}
+
+p.pricing-blurb {
+	font-size: 1.6rem !important;
+	margin-top:-20px !important;
+}
+
+.entry-content p {
+    padding: .5rem 0;
+}
+
+#inner > .widely-inner-container #content .entry-content .section h3 {
+	padding: 0;
+}
+
+ #inner > .widely-inner-container #content .entry-content .section .plan-card h5 {
+    padding: 8px 0;
+    font-weight: 400;
+    font-size:21px !important;
+    border-bottom:1px solid #333;
+    margin-bottom:10px;
+}
+#inner > .widely-inner-container #content .entry-content .section .plan-card .plan-limit h3.limit-number, .single #inner > #inner #content .entry-content .section .plan-card .plan-limit h3.limit-number, .single-product #inner > #inner #content .entry-content .section .plan-card .plan-limit h3.limit-number, .woocommerce-page #inner > #inner #content .entry-content .section .plan-card .plan-limit h3.limit-number {
+	font-weight: 400;
+    font-size: 50px;
+    letter-spacing: -4px;
+    padding-bottom:5px;
+}
+
+#inner > .widely-inner-container #content .entry-content .section .plan-card .plan-limit p, .single #inner > #inner #content .entry-content .section .plan-card .plan-limit p, .single-product #inner > #inner #content .entry-content .section .plan-card .plan-limit p, .woocommerce-page #inner > #inner #content .entry-content .section .plan-card .plan-limit p {
+    font-size:16px !important;
+    font-weight:400;
+}
+
+.plan-disclaimer p {
+    line-height: 1.2em;
+    padding-bottom:10px;
+}
+
+.single-product.woocommerce #inner {
+    padding: 13px !important;
+}
+
+/*==================  Images  ==================*/
+
+img.section-img {
+    margin:0 0 40px;
+    border:5px solid white;
+    padding:0;
+}
+
+img.phone {
+    border:none;
+}
+
+
+
+/*================== Buttons  ==================*/
+
+#inner > .widely-inner-container #content .entry-content .section .plan-card .plan-price a, .single #inner > #inner #content .entry-content .section .plan-card .plan-price a, .single-product #inner > #inner #content .entry-content .section .plan-card .plan-price a, .woocommerce-page #inner > #inner #content .entry-content .section .plan-card .plan-price .button {
+    width: 80%;
+    margin: 0px auto 10px;
+    font-size: 2rem;
+    border-radius: 0;
+    border: 0;
+    padding: 10px;
+    font-weight:
+}
+
+.button-secondary {
+    background-color:#2BB8E6;
+    border-radius: 0;
+    border: 0;
+}
+
+
+/*==================  Containers  ==================*/
+
+.centered-content {
+	margin: 40px auto;
+	max-width: 650px;
+}
+
+#inner > .widely-inner-container #content .entry-content .section .section-contain, .single #inner > #inner #content .entry-content .section .section-contain, .single-product #inner > #inner #content .entry-content .section .section-contain, .woocommerce-page #inner > #inner #content .entry-content .section .section-contain {
+    padding: 5rem 5.5rem !important;
+}
+#intro, #admin, #features, #pricing{
+    padding: 20px 0 !important;
+}
+
+
+/*==================  FOOTER  ==================*/
+
+#contact h6 {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom:0 !important;
+    padding-top:32px !important;
+}
+
+.section.black {
+    background: none repeat scroll 0% 0% #000;
+}
+#address {
+    font-size: 16px;
+}
+.footer-logo {
+    width: 80%;
+    max-width:300px;
+}
+
+.widely-footer p, .widely-footer a {
+    font-size: 11px !important;
+    color: #333;
+}
+.widely-footer a {
+    text-decoration:underline;
+}
+
+
+
+
+
+
+
+
+/*==================  Tablet  ==================*/
+
+@media only screen and (max-width: 800px) {
+
+
+#inner > .widely-inner-container #content .entry-content .section .section-contain, .single #inner > #inner #content .entry-content .section .section-contain, .single-product #inner > #inner #content .entry-content .section .section-contain, .woocommerce-page #inner > #inner #content .entry-content .section .section-contain {
+    padding: 5rem 3.1rem !important;
+}
+
+
+
+
+
+
+
+
+
+/*==================  MOBILE  ==================*/
+
+@media only screen and (max-width: 480px) {
+
+#header .wrap #title-area .homepage-header-left-container {
+    width: 95%;
+}
+
+
+/*========  Images  ========*/
+
+img.section-img {
+    margin:0;
+}
+/* .first-col {
+    margin-top:40px !important;
+    padding-top:40px !important;
+    border-top:2px solid rgba(0,0,0,.2);
+}
+ */
+}

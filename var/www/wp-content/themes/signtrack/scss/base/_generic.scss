@@ -1,0 +1,40 @@
+
+img {
+	max-width: 90%;
+	padding: 0 5%;
+	@include mobile {
+		max-width: 100%;
+		padding: 0;
+	}
+}
+
+.wrap div, .widely-inner-container div {
+	//@include padding($padding-xs);
+}
+
+
+.centertext {
+	text-align: center;
+}
+.righttext {
+	text-align: right;
+}
+.lefttext {
+	text-align: left;
+}
+
+
+.clear {
+	&.fat-clear {
+		height: $size-10 * 1px;
+	}
+}
+
+.fat-clear {
+
+	clear: both;
+	float: none;
+	@include mobile {
+		height: $size-10 * 1px;
+	}
+}

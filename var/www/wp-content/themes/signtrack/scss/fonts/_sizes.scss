@@ -1,0 +1,58 @@
+
+
+// Base font size is 10
+html {
+	font-size: $base-font-size * 1px;
+}
+
+applet, object, iframe, div,
+h1, h2, h3, h4, h5, h6, blockquote,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	@include font-relation($text-size);
+}
+
+$h6-size: $text-size; // 12
+
+h6 {
+	@include font-relation($h6-size);
+}
+
+$h5-size: $text-size * 1.5;
+
+h5 {
+	@include font-relation($h5-size);
+}
+
+$h4-size: $text-size * 2.0;
+
+h4 {
+	@include font-relation($h4-size);
+}
+
+$h3-size: $text-size * 2.5;
+
+h3 {
+	@include font-relation($h3-size);
+}
+
+$h2-size: $text-size * 3.0;
+
+h2 {
+	@include font-relation($h2-size);
+}
+
+
+$h1-size: $text-size * 4.0;
+
+h1 {
+	@include font-relation($h1-size);
+}

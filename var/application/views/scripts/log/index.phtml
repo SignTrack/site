@@ -1,0 +1,43 @@
+<?= $this->headScript() ?> 
+<?= $this->headLink() ?>
+<table id="page-options"><tr style="height:40px;"><td>
+<div class="row-fluid header" id="layout-header" >
+
+           
+
+                <div class="filters pull-left">
+                    <select id="select-user" id="columns-view" style="width:200px;margin-left:15px;" class="form-control">
+                        <option value="0">All Team Members</option>
+                        <?php
+                        $users = $this->users;
+                        for($i=0;$i<sizeof($users);$i++){
+                            echo '<option value="'.$users[$i]['user_id'].'">'.$users[$i]['name'].'</option>';
+                        }
+                            
+                        ?>
+<!--                        <option value="Stats">Stats</option>-->
+                    </select>
+                    <input id="input-sign" type="text" style="margin-right:5px;width:140px;" placeholder="Sign ID">
+                    <div id="loader" class="pull-right" style="display:none;"><img src="<?= $this->baseUrl() ?>/images/ajax-loader.gif" style="width:25px;margin:4px 5px;"></div>
+                    <button class="btn pull-right" style="margin-right:5px;" onclick="getSearch()"><img src="<?= $this->baseUrl() ?>/images/refresh.png" style="width:20px;"></button>
+                    
+                </div>
+<!--<div id="content-options" class="pull-right" >
+                                <div style="text-align:left;">
+                                    <button class="btn btn-primary pull-right btn-add" onclick="show_add();" type="button"><i class="icon-plus icon-white"></i>&nbsp;<span id="btn-add">Add Sign</span></button>
+                                <button class="btn pull-right" style="margin-right:10px;"><i class="icon-file"></i> Excel Export</button>
+                                </div>
+    </div>-->
+    
+</div>
+
+
+        </td></tr><tr><td>
+<table><tr><td></td><tr></table>         
+        </td></tr></table>
+<div id="tabs-1" class="tab-content clearfix">
+<!--        <div class="nav-options"><button style="height:30px;padding:5px 10px;" class="medium" id="btn-user-add"><span class="icon" data-icon="+"></span>Add User</button></div>-->
+            <div id="grid-list" >
+<div id="itemGrid" ></div>     
+            </div>
+            </div>

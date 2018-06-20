@@ -1,0 +1,616 @@
+@mixin grid_render($width, $strict:'') {
+	$col : 100/2310;
+	$col_count : $width * 2310;
+
+	$size : $col * $col_count;
+	$size_pc : $size * 1%;
+
+	$grid_padding : $padding;
+
+	width: $size_pc;
+	box-sizing: border-box;
+
+	@if ($strict == '') {
+		//width: calc( #{$size_pc} - (#{$grid_padding} * 2px) );
+		@include padding($grid_padding);
+	}
+
+	@if ($width != 1) {
+		float: left;
+	}
+	@else {
+		float: none;
+	}
+
+}
+
+
+
+
+@mixin page_width($width, $orient:'') {
+	@if ($orient != '') {
+		@if $width == 1 {
+			@media only screen and ( min-width: $break1 ) and ( orientation: $orient) {
+				@content;
+			}
+		}
+
+		@else if $width == 2 {
+			@media only screen and ( max-width: $break1 ) and ( min-width: $break2 ) and ( orientation: $orient) {
+				@content;
+			}
+		}
+
+		@else if $width == 3 {
+			@media only screen and ( max-width: $break2 ) and ( min-width: $break3 ) and ( orientation: $orient)
+			and ( orientation: $orient) {
+				@content;
+			}
+		}
+
+		@else if $width == 4 {
+			@media only screen and ( max-width: $break3 ) and ( min-width: $break4 ) and ( orientation: $orient) {
+				@content;
+			}
+		}
+
+		@else if $width == 5 {
+			@media only screen and ( max-width: $break4 ) and ( min-width: $break5 ) and ( orientation: $orient) {
+				@content;
+			}
+		}
+
+		@else if $width == 6 {
+			@media only screen and ( max-width: $break5 ) and ( min-width: $break6 ) and ( orientation: $orient) {
+				@content;
+			}
+		}
+
+		@else if $width == 7 {
+			@media only screen and ( max-width: $break6 ) and ( min-width: $break7 ) and ( orientation: $orient) {
+				@content;
+			}
+		}
+
+		@else if $width == 8 {
+			@media only screen and ( max-width: $break7 ) and ( min-width: $break8 ) and ( orientation: $orient) {
+				@content;
+			}
+		}
+
+
+		@else if $width == 9 {
+			@media only screen and ( max-width: $break8 ) and ( orientation: $orient) {
+				@content;
+			}
+		}
+	}
+	@else {
+		@if $width == 1 {
+			@media only screen and ( min-width: $break1 ) {
+				@content;
+			}
+		}
+
+		@else if $width == 2 {
+			@media only screen and ( max-width: $break1 ) and ( min-width: $break2 ) {
+				@content;
+			}
+		}
+
+		@else if $width == 3 {
+			@media only screen and ( max-width: $break2 ) and ( min-width: $break3 ) {
+				@content;
+			}
+		}
+
+		@else if $width == 4 {
+			@media only screen and ( max-width: $break3 ) and ( min-width: $break4 ) {
+				@content;
+			}
+		}
+
+		@else if $width == 5 {
+			@media only screen and ( max-width: $break4 ) and ( min-width: $break5 ) {
+				@content;
+			}
+		}
+
+		@else if $width == 6 {
+			@media only screen and ( max-width: $break5 ) and ( min-width: $break6 ) {
+				@content;
+			}
+		}
+
+		@else if $width == 7 {
+			@media only screen and ( max-width: $break6 ) and ( min-width: $break7 ) {
+				@content;
+			}
+		}
+
+		@else if $width == 8 {
+			@media only screen and ( max-width: $break7 ) and ( min-width: $break8 ) {
+				@content;
+			}
+		}
+
+		@else if $width == 9 {
+			@media only screen and ( max-width: $break8 ) and ( min-width: $break9 ) {
+				@content;
+			}
+		}
+
+
+		@else if $width == 10 {
+			@media only screen and ( max-width: $break9 ) {
+				@content;
+			}
+		}
+	}
+
+}
+
+
+@mixin mobile() {
+	/* Portrait */
+	@include page_width(10) {@content;}
+	@include page_width(9) {@content;}
+	@include page_width(8) {@content;}
+	@include page_width(7) {@content;}
+
+	/* Landscape */
+	/* @include page_width(10, 'landscape') {@content;}
+	@include page_width(9, 'landscape') {@content;}
+	@include page_width(8, 'landscape') {@content;}
+	@include page_width(7, 'landscape') {@content;}
+	@include page_width(6, 'landscape') {@content;} */
+}
+
+@mixin tablet() {
+	/* Portrait */
+	@include page_width(6) {@content;}
+	//@include page_width(5) {@content;}
+
+	/* Landscape */
+	/* @include page_width(5, 'landscape') {@content;}
+	@include page_width(4, 'landscape') {@content;} */
+}
+
+@mixin monitor() {
+	/* Portrait */
+	@include page_width(5) {@content;}
+	@include page_width(4) {@content;}
+	@include page_width(3) {@content;}
+	@include page_width(2) {@content;}
+	@include page_width(1) {@content;}
+
+	/* Landscape */
+	/* @include page_width(3, 'landscape') {@content;}
+	@include page_width(2, 'landscape') {@content;}
+	@include page_width(1, 'landscape') {@content;} */
+}
+
+
+
+.widely-container {
+	width: 100%;
+	 #wrap {
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+
+#wrap .wrap, #wrap .widely-inner-container, .single-product #inner {
+	@include page_width(1) {
+		width: $break2 - ($min_gutter * 3);
+		max-width: $break2 - ($min_gutter * 3);
+		margin: 0 auto;
+	}
+
+	@include page_width(2) {
+		width: $break2 - ($min_gutter * 3);
+		max-width: $break2 - ($min_gutter * 3);
+		margin: 0 auto;
+	}
+
+	@include page_width(3) {
+		width: $break3 - ($min_gutter * 2);
+		max-width: $break3 - ($min_gutter * 2);
+		margin: 0 auto;
+	}
+
+	@include page_width(4) {
+		width: $break4 - ($min_gutter * 2);
+		max-width: $break4 - ($min_gutter * 2);
+		margin: 0 auto;
+	}
+
+	@include page_width(5) {
+		width: $break5 - ($min_gutter * 2);
+		max-width: $break5 - ($min_gutter * 2);
+		margin: 0 auto;
+	}
+
+	@include page_width(6) {
+		width: $break6 - ($min_gutter * 1);
+		max-width: $break6 - ($min_gutter * 1);
+		margin: 0 auto;
+	}
+
+	@include page_width(7) {
+		width: $break7 - ($min_gutter * 1);
+		max-width: $break7 - ($min_gutter * 1);
+		margin: 0 auto;
+	}
+
+	@include page_width(8) {
+		width: $break8 - ($min_gutter * 1);
+		max-width: $break8 - ($min_gutter * 1);
+		margin: 0 auto;
+	}
+
+	@include page_width(9) {
+		//width: $break9 - ($min_gutter * 1);
+		//max-width: $break9 - ($min_gutter * 1);
+		margin: 0 auto;
+	}
+
+}
+
+.clear {
+	clear: both;
+	float: none;
+}
+
+.grid-1 { @include grid-render(1); }
+
+.grid-1-2 { @include grid_render(.5); }
+
+.grid-1-3rd { @include grid_render(1/3); }
+.grid-2-3rds { @include grid_render(2/3); }
+
+.grid-1-4th { @include grid_render(1/4); }
+.grid-3-4ths { @include grid_render(3/4); }
+
+.grid-1-5th { @include grid_render(1/5); }
+.grid-2-5ths { @include grid_render(2/5); }
+.grid-3-5ths { @include grid_render(3/5); }
+.grid-4-5ths { @include grid_render(4/5); }
+
+.grid-1-6th { @include grid_render(1/6); }
+.grid-5-6ths { @include grid_render(5/6); }
+
+.grid-1-7th { @include grid_render(1/7); }
+.grid-2-7ths { @include grid_render(2/7); }
+.grid-3-7ths { @include grid_render(3/7); }
+.grid-4-7ths { @include grid_render(4/7); }
+.grid-5-7ths { @include grid_render(5/7); }
+.grid-6-7ths { @include grid_render(6/7); }
+
+.grid-1-8th { @include grid_render(1/8); }
+.grid-3-8ths { @include grid_render(3/8); }
+.grid-5-8ths { @include grid_render(5/8); }
+.grid-7-8ths { @include grid_render(7/8); }
+
+.grid-1-9th { @include grid_render(1/9); }
+.grid-2-9ths { @include grid_render(2/9); }
+.grid-4-9ths { @include grid_render(4/9); }
+.grid-5-9ths { @include grid_render(5/9); }
+.grid-7-9ths { @include grid_render(7/9); }
+.grid-8-9ths { @include grid_render(8/9); }
+
+.grid-1-10th { @include grid_render(1/10); }
+.grid-3-10ths { @include grid_render(3/10); }
+.grid-7-10ths { @include grid_render(7/10); }
+.grid-9-10ths { @include grid_render(9/10); }
+
+
+
+.grid-1-strict { @include grid-render(1, true); }
+
+.grid-1-2-strict { @include grid_render(.5, true); }
+
+.grid-1-3rd-strict { @include grid_render(1/3, true); }
+.grid-2-3rds-strict { @include grid_render(2/3, true); }
+
+.grid-1-4th-strict { @include grid_render(1/4, true); }
+.grid-3-4ths-strict { @include grid_render(3/4, true); }
+
+.grid-1-5th-strict { @include grid_render(1/5, true); }
+.grid-2-5ths-strict { @include grid_render(2/5, true); }
+.grid-3-5ths-strict { @include grid_render(3/5, true); }
+.grid-4-5ths-strict { @include grid_render(4/5, true); }
+
+.grid-1-6th-strict { @include grid_render(1/6, true); }
+.grid-5-6ths-strict { @include grid_render(5/6, true); }
+
+.grid-1-7th-strict { @include grid_render(1/7, true); }
+.grid-2-7ths-strict { @include grid_render(2/7, true); }
+.grid-3-7ths-strict { @include grid_render(3/7, true); }
+.grid-4-7ths-strict { @include grid_render(4/7, true); }
+.grid-5-7ths-strict { @include grid_render(5/7, true); }
+.grid-6-7ths-strict { @include grid_render(6/7, true); }
+
+.grid-1-8th-strict { @include grid_render(1/8, true); }
+.grid-3-8ths-strict { @include grid_render(3/8, true); }
+.grid-5-8ths-strict { @include grid_render(5/8, true); }
+.grid-7-8ths-strict { @include grid_render(7/8, true); }
+
+.grid-1-9th-strict { @include grid_render(1/9, true); }
+.grid-2-9ths-strict { @include grid_render(2/9, true); }
+.grid-4-9ths-strict { @include grid_render(4/9, true); }
+.grid-5-9ths-strict { @include grid_render(5/9, true); }
+.grid-7-9ths-strict { @include grid_render(7/9, true); }
+.grid-8-9ths-strict { @include grid_render(8/9, true); }
+
+
+.grid-1-10th-strict { @include grid_render(1/10, true); }
+.grid-3-10ths-strict { @include grid_render(3/10, true); }
+.grid-7-10ths-strict { @include grid_render(7/10, true); }
+.grid-9-10ths-strict { @include grid_render(9/10, true); }
+
+/* Denoms of 2 */
+@include tablet {
+	.grid-1-4th { @include grid_render(1/2); }
+	.grid-3-4ths { @include grid_render(1/2); }
+
+	.grid-1-6th { @include grid_render(1/3) }
+	.grid-5-6ths { @include grid_render(2/3) }
+
+	.grid-1-4th-strict { @include grid_render(1/2, true); }
+	.grid-3-4ths-strict { @include grid_render(1/2, true); }
+
+	.grid-1-6th-strict { @include grid_render(1/3, true) }
+	.grid-5-6ths-strict { @include grid_render(2/3, true) }
+
+
+	.grid-1-10th { @include grid_render(1/5); }
+	.grid-3-10ths { @include grid_render(2/5); }
+	.grid-7-10ths { @include grid_render(3/5); }
+	.grid-9-10ths { @include grid_render(4/5); }
+
+	.grid-1-10th-strict { @include grid_render(1/5, true); }
+	.grid-3-10ths-strict { @include grid_render(2/5, true); }
+	.grid-7-10ths-strict { @include grid_render(3/5, true); }
+	.grid-9-10ths-strict { @include grid_render(4/5, true); }
+}
+
+@include mobile {
+	.grid-1-2,
+	.grid-1-3rd, .grid-2-3rds,
+	.grid-1-4th, .grid-3-4ths,
+	.grid-1-5th, .grid-2-5ths, .grid-3-5ths, .grid-4-5ths,
+	.grid-1-6th, .grid-5-6ths,
+	.grid-1-7th, .grid-2-7ths, .grid-3-7ths, .grid-4-7ths, .grid-5-7ths, .grid-6-7ths,
+	.grid-1-8th, .grid-3-8ths, .grid-5-8ths, .grid-7-8ths,
+	.grid-1-9th, .grid-2-9ths, .grid-4-9ths, .grid-5-9ths, .grid-7-9ths, .grid-8-9ths,
+	.grid-1-10th, .grid-3-10ths, .grid-7-10ths, .grid-9-10ths {
+		@include grid_render(1); float: none;
+	}
+
+
+	.grid-1-2-strict,
+	.grid-1-3rd-strict, .grid-2-3rds-strict,
+	.grid-1-4th-strict, .grid-3-4ths-strict,
+	.grid-1-5th-strict, .grid-2-5ths-strict, .grid-3-5ths-strict, .grid-4-5ths-strict,
+	.grid-1-6th-strict, .grid-5-6ths-strict,
+	.grid-1-7th-strict, .grid-2-7ths-strict, .grid-3-7ths-strict, .grid-4-7ths-strict, .grid-5-7ths-strict, .grid-6-7ths-strict,
+	.grid-1-8th-strict, .grid-3-8ths-strict, .grid-5-8ths-strict, .grid-7-8ths-strict,
+	.grid-1-9th-strict, .grid-2-9ths-strict, .grid-4-9ths-strict, .grid-5-9ths-strict, .grid-7-9ths-strict, .grid-8-9ths-strict,
+	.grid-1-10th-strict, .grid-3-10ths-strict, .grid-7-10ths-strict, .grid-9-10ths-strict {
+		@include grid_render(1, true); float: none;
+	}
+}
+
+@include page_width(2) {}
+
+@include page_width(3) {
+	.grid-1-6th {
+		@include grid_render(1/3);
+	}
+	.grid-5-6ths {
+		@include grid_render(2/3);
+	}
+
+	.grid-1-6th-strict {
+		@include grid_render(1/3, true);
+	}
+	.grid-5-6ths-strict {
+		@include grid_render(2/3, true);
+	}
+}
+
+@include page_width(4) {
+
+	.grid-1-4th {
+		@include grid_render(1/2);
+	}
+	.grid-3-4ths {
+		@include grid_render(1/2);
+	}
+
+	.grid-1-6th {
+		@include grid_render(1/3);
+	}
+	.grid-5-6ths {
+		@include grid_render(2/3);
+	}
+
+
+	.grid-1-4th-strict {
+		@include grid_render(1/2, true);
+	}
+	.grid-3-4ths-strict {
+		@include grid_render(1/2, true);
+	}
+
+	.grid-1-6th-strict {
+		@include grid_render(1/3, true);
+	}
+	.grid-5-6ths-strict {
+		@include grid_render(2/3, true);
+	}
+}
+
+@include page_width(5) {
+
+	.grid-1-4th {
+		@include grid_render(1/2);
+	}
+	.grid-3-4ths {
+		@include grid_render(1/2);
+	}
+
+	.grid-1-6th {
+		@include grid_render(1/3);
+	}
+	.grid-5-6ths {
+		@include grid_render(2/3);
+	}
+
+
+	.grid-1-4th-strict {
+		@include grid_render(1/2, true);
+	}
+	.grid-3-4ths-strict {
+		@include grid_render(1/2, true);
+	}
+
+	.grid-1-6th-strict {
+		@include grid_render(1/3, true);
+	}
+	.grid-5-6ths-strict {
+		@include grid_render(2/3, true);
+	}
+}
+
+@include page_width(6) {
+	.grid-1-6th {
+		@include grid_render(1/2);
+	}
+	.grid-5-6ths {
+		@include grid_render(1/2);
+	}
+
+	.grid-1-6th-strict {
+		@include grid_render(1/2);
+	}
+	.grid-5-6ths-strict {
+		@include grid_render(1/2);
+	}
+}
+
+@include page_width(7) {
+	.grid-1-6th {
+		@include grid_render(1/2);
+	}
+	.grid-5-6ths {
+		@include grid_render(1/2);
+	}
+
+
+	.grid-1-6th-strict {
+		@include grid_render(1/2);
+	}
+	.grid-5-6ths-strict {
+		@include grid_render(1/2);
+	}
+
+
+
+	.grid-3-10ths { @include grid_render(1/2); }
+	.grid-7-10ths { @include grid_render(1/2); }
+
+	.grid-3-10ths-strict { @include grid_render(1/2, true); }
+	.grid-7-10ths-strict { @include grid_render(1/2, true); }
+}
+
+@include page_width(8) {
+
+	.grid-3-10ths { @include grid_render(1/2); }
+	.grid-7-10ths { @include grid_render(1/2); }
+
+	.grid-3-10ths-strict { @include grid_render(1/2, true); }
+	.grid-7-10ths-strict { @include grid_render(1/2, true); }
+
+}
+
+@include page_width(9) {}
+
+
+
+
+
+
+
+
+.grid-1-2.grid-size-always { @include grid_render(.5); }
+
+.grid-1-3rd.grid-size-always { @include grid_render(1/3); }
+.grid-2-3rds.grid-size-always { @include grid_render(2/3); }
+
+.grid-1-4th.grid-size-always { @include grid_render(1/4); }
+.grid-3-4ths.grid-size-always { @include grid_render(3/4); }
+
+.grid-1-5th.grid-size-always { @include grid_render(1/5); }
+.grid-2-5ths.grid-size-always { @include grid_render(2/5); }
+.grid-3-5ths.grid-size-always { @include grid_render(3/5); }
+.grid-4-5ths.grid-size-always { @include grid_render(4/5); }
+
+.grid-1-6th.grid-size-always { @include grid_render(1/6); }
+.grid-5-6ths.grid-size-always { @include grid_render(5/6); }
+
+.grid-1-7th.grid-size-always { @include grid_render(1/7); }
+.grid-2-7ths.grid-size-always { @include grid_render(2/7); }
+.grid-3-7ths.grid-size-always { @include grid_render(3/7); }
+.grid-4-7ths.grid-size-always { @include grid_render(4/7); }
+.grid-5-7ths.grid-size-always { @include grid_render(5/7); }
+.grid-6-7ths.grid-size-always { @include grid_render(6/7); }
+
+.grid-1-8th.grid-size-always { @include grid_render(1/8); }
+.grid-3-8ths.grid-size-always { @include grid_render(3/8); }
+.grid-5-8ths.grid-size-always { @include grid_render(5/8); }
+.grid-7-8ths.grid-size-always { @include grid_render(7/8); }
+
+.grid-1-9th.grid-size-always { @include grid_render(1/9); }
+.grid-2-9ths.grid-size-always { @include grid_render(2/9); }
+.grid-4-9ths.grid-size-always { @include grid_render(4/9); }
+.grid-5-9ths.grid-size-always { @include grid_render(5/9); }
+.grid-7-9ths.grid-size-always { @include grid_render(7/9); }
+.grid-8-9ths.grid-size-always { @include grid_render(8/9); }
+
+
+.grid-1-2-strict.grid-size-always { @include grid_render(.5, true); }
+
+.grid-1-3rd-strict.grid-size-always { @include grid_render(1/3, true); }
+.grid-2-3rds-strict.grid-size-always { @include grid_render(2/3, true); }
+
+.grid-1-4th-strict.grid-size-always { @include grid_render(1/4, true); }
+.grid-3-4ths-strict.grid-size-always { @include grid_render(3/4, true); }
+
+.grid-1-5th-strict.grid-size-always { @include grid_render(1/5, true); }
+.grid-2-5ths-strict.grid-size-always { @include grid_render(2/5, true); }
+.grid-3-5ths-strict.grid-size-always { @include grid_render(3/5, true); }
+.grid-4-5ths-strict.grid-size-always { @include grid_render(4/5, true); }
+
+.grid-1-6th-strict.grid-size-always { @include grid_render(1/6, true); }
+.grid-5-6ths-strict.grid-size-always { @include grid_render(5/6, true); }
+
+.grid-1-7th-strict.grid-size-always { @include grid_render(1/7, true); }
+.grid-2-7ths-strict.grid-size-always { @include grid_render(2/7, true); }
+.grid-3-7ths-strict.grid-size-always { @include grid_render(3/7, true); }
+.grid-4-7ths-strict.grid-size-always { @include grid_render(4/7, true); }
+.grid-5-7ths-strict.grid-size-always { @include grid_render(5/7, true); }
+.grid-6-7ths-strict.grid-size-always { @include grid_render(6/7, true); }
+
+.grid-1-8th-strict.grid-size-always { @include grid_render(1/8, true); }
+.grid-3-8ths-strict.grid-size-always { @include grid_render(3/8, true); }
+.grid-5-8ths-strict.grid-size-always { @include grid_render(5/8, true); }
+.grid-7-8ths-strict.grid-size-always { @include grid_render(7/8, true); }
+
+.grid-1-9th-strict.grid-size-always { @include grid_render(1/9, true); }
+.grid-2-9ths-strict.grid-size-always { @include grid_render(2/9, true); }
+.grid-4-9ths-strict.grid-size-always { @include grid_render(4/9, true); }
+.grid-5-9ths-strict.grid-size-always { @include grid_render(5/9, true); }
+.grid-7-9ths-strict.grid-size-always { @include grid_render(7/9, true); }
+.grid-8-9ths-strict.grid-size-always { @include grid_render(8/9, true); }

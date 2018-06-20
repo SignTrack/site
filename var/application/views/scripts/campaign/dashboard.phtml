@@ -1,0 +1,197 @@
+<?= $this->headScript() ?> 
+<?= $this->headLink() ?>
+
+<div class="row-fluid dashboard" id="layout-header" >
+    <table id="dash-top">
+        <tr>
+<!--            <td><span class="big-num"><?= $this->dashboard['days'] ?></span><br><strong>Days Remaining</strong><br>Subscription ends<br><?= $this->dashboard['date_end'] ?></td>-->
+            
+            <tr id="display-recover" style="<?php if(!$this->is_over)echo 'display:none'; ?>">
+            <td style="width:16.6%"><div style="margin-top:40px;font-size:16px;color:#2BB8E6;"><strong><?= $this->campaign['package'] ?></strong></div><?= number_format ( $this->campaign['sign_limit'] , 0 , "." , "," ) ?> Sign Locations<BR><?= $this->dashboard['num_signs'] ?> Used</td>
+            <td style="width:16.6%"><span class="big-num gray"><?= number_format(preg_replace("/[^0-9]/", "", $this->dashboard['s_fix'])+ preg_replace("/[^0-9]/", "", $this->dashboard['s_ok']) + preg_replace("/[^0-9]/", "", $this->dashboard['s_recover'])) ?></span><br><strong>Signs to Recover</strong></td>
+            
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
+               <tr id="display-normal" style="<?php if($this->is_over)echo 'display:none'; ?>">
+            <td><div style="margin-top:40px;font-size:16px;color:#2BB8E6;"><strong><?= $this->campaign['package'] ?></strong></div><?= number_format ( $this->campaign['sign_limit'] , 0 , "." , "," ) ?> Sign Locations<BR><?= $this->dashboard['num_signs'] ?> Used</td>
+            <td><span id="total-remaining" class="big-num"><?= $this->dashboard['num_remaining']  ?></span><br><strong>Signs Remaining</strong><br>of <span id="total-signs"><?= $this->dashboard['num_total'] ?></span></td>
+            <td><span class="big-num red"><?= $this->dashboard['s_replace'] ?></span><br><strong>Signs to Replace</strong><br>Out of <?= $this->dashboard['num_signs'] ?></td>
+            <td><span class="big-num yellow"><?= $this->dashboard['s_fix']  ?></span><br><strong>Signs to Fix</strong><br>Out of <?= $this->dashboard['num_signs'] ?></td>
+            <td><span class="big-num green"><?= $this->dashboard['s_ok']  ?></span><br><strong>Signs OK</strong><br>Out of <?= $this->dashboard['num_signs'] ?></td>
+            <td><span class="big-num gray"><?= $this->dashboard['s_place']  ?></span><br><strong>Signs to Place</strong><br>Out of <?= $this->dashboard['num_signs'] ?></td>
+             </tr>
+        </tr>
+    </table>
+    <script>
+                   SIGN_LOCATIONS = <?php echo $this->dashboard['num_signs']; ?>;
+                   NUM_USERS = <?php echo $this->dashboard['num_users']; ?>;
+                   console.log(<?= $num ?>);
+                    </script>
+    <div id="help-dashboard"><div></div></div>
+</div>
+<div class="row-fluid" >
+    <div class="span8">
+        <div style="margin:20px;">
+            <table class="sign-percent">
+                <tr class="header-cells"><td>Materials <div class="header-btn" onclick="add('Material')">ADD MORE</div></td><td></td><td>Used</td><td>Inventory</td><td>Remaining</td><td></td></tr> 
+                <?php
+                $inventory = $this->inventory;
+                $items = json_encode($this->inventory);
+          
+                $totalRemaining = 0;
+                $totalInventory = 0;
+                $totalSpent = 0;
+                $materialCount=0;
+                for($i=0;$i<count($inventory);$i++){
+                    if($inventory[$i]['inventory_type']=='Material'){
+                            $materialCount++;
+                        ($inventory[$i]['money_used']!='0.00')?$style='':$style='display:none;';
+                        echo '<tr><td class="name-cell">'.$inventory[$i]['name'].'<small>'.$inventory[$i]['num_total'].'</small></td><td width="100"><div class="bgray" style="'.$style.'"><div class="percent-bar" style="width:'.$inventory[$i]['fraction'].'%;"></div></div></td><td><h1>$'.$inventory[$i]['money_used'].'</h1></td><td><h1>$'.$inventory[$i]['money_inventory'].'</h1></td><td><h1>'.$inventory[$i]['num_remaining'].'</h1></td><td><img class="btn-dash" onclick="edit('.$inventory[$i]['inventory_id'].')" src="'.$this->baseUrl().'/images/edit.png"></td></tr>';
+                         $totalRemaining += str_replace(',','',$inventory[$i]['num_remaining'])*1;
+                        $totalInventory += str_replace(',','',$inventory[$i]['money_inventory'])*1;
+                        $totalSpent += str_replace(',','',$inventory[$i]['money_used'])*1;
+                    }
+                }
+                ?>
+                <tr class="table-total"><td class="name-cell">Total</td><td></td><td><h1>$<?= number_format ( $totalSpent , 2 , "." , "," ) ?></h1></td><td><h1>$<?= number_format ( $totalInventory , 2 , "." , "," ) ?></h1></td><td><h1><?= number_format ( $totalRemaining , 0 , "." , "," ) ?></h1></td><td></td></tr> 
+            </table>
+            <script>
+                   MATERIAL_COUNT = <?php echo $materialCount; ?>;
+                    </script>
+            <table class="sign-percent">
+                <tr class="header-cells"><td >Sign Type <div class="header-btn" onclick="add('Sign')">ADD MORE</div></td><td></td><td>Used</td><td>Inventory</td><td>Remaining</td><td></td></tr> 
+                <?php
+                $totalRemaining = 0;
+                $totalInventory = 0;
+                $totalSpent = 0;
+                $signCount=0;
+                for($i=0;$i<count($inventory);$i++){
+                    if($inventory[$i]['inventory_type']=='Sign'){
+                        $signCount++;
+                        ($inventory[$i]['money_used']!='0.00')?$style='':$style='display:none;';
+                        $extra='';
+                        if($inventory[$i]['material_name']!=''){
+                            $extra =  ' ('.$inventory[$i]['num_material'].' '.$inventory[$i]['material_name'].' ea.)';
+                        }
+                        
+                        echo '<tr><td class="name-cell">'.$inventory[$i]['name'].'<small>'.$inventory[$i]['num_total'].$extra.'</small></td><td width="100"><div class="bgray" style="'.$style.'"><div class="percent-bar" style="width:'.$inventory[$i]['fraction'].'%"></div></div></td><td><h1>$'.$inventory[$i]['money_used'].'</h1></td><td><h1>$'.$inventory[$i]['money_inventory'].'</h1></td><td><h1>'.$inventory[$i]['num_remaining'].'</h1></td><td><img onclick="edit('.$inventory[$i]['inventory_id'].')" class="btn-dash" src="'.$this->baseUrl().'/images/edit.png"></td></tr>';
+                    
+                        $totalRemaining += str_replace(',','',$inventory[$i]['num_remaining'])*1;
+                        $totalInventory += str_replace(',','',$inventory[$i]['money_inventory'])*1;
+                        $totalSpent += str_replace(',','',$inventory[$i]['money_used'])*1;
+                    }
+                    
+                }
+                ?>
+           
+                <script>
+                   SIGN_COUNT = <?php echo $signCount ?>;
+                    </script>
+            
+                <tr class="table-total"><td class="name-cell">Total</td><td></td><td><h1>$<?= number_format ( $totalSpent , 2 , "." , "," ) ?></h1></td><td><h1>$<?= number_format ( $totalInventory , 2 , "." , "," ) ?></h1></td><td><h1><?= number_format ( $totalRemaining , 0 , "." , "," ) ?></h1></td><td></td></tr> 
+            </table>
+    <!--        <table id="sign-rebars" class="sign-percent" style="width:100%">
+                <tr><td><h1>ReBars</h1></td><td class="bgray"><div class="percent-bar" style="width:34%"></div></td><td><h1>34%</h1></td><td>1002<small>of 1,500</small></td></tr> 
+            </table>-->
+        </div>
+    </div>
+    <div class="span4">
+        <div style="margin-right:20px;margin-top:20px;">
+            <table class="dash-box">
+                <tr><td width="40%"><h1 style="margin:0; font-size:18px !important;">Notifications</h1></td><td style="text-align:right;"><div id="toggle-notifications" onclick="toggleNotifications()" class="toggle-btn"><div class="<?php if($this->dashboard['notifications']*1==1)echo 'toggle-active'; ?>">On</div><div class="<?php if($this->dashboard['notifications']*1==0)echo 'toggle-active'; ?>">Off</div></div></td><tr>
+                <tr id="tr-view-notify"><td ><label>Inventory Below</label></td><td><div id="view-notify" style="margin-left:-15px;"><?= $this->dashboard['num_notify'] ?></div></td><tr>
+                <tr id="tr-view-email" ><td><label>Email</label></td><td><div id="view-email"><?= $this->dashboard['email'] ?></div></td></tr>
+                <tr id="tr-input-notify" style="display:none"><td ><label>Inventory Below</label></td><td><input id="input-notify" maxlength="6" value="<?= $this->dashboard['num_notify'] ?>" type="text"></td><tr>
+                <tr id="tr-input-email" style="display:none"><td><label>Email</label></td><td><input maxlength="100" id="input-email" type="text" value="<?= $this->dashboard['email'] ?>"></td></tr>
+                <tr id="tr-view-options"  style="height:15px;"><td></td><td style="text-align:right;"><small><a onclick="editDashboard('notify','edit');" style="float:right;">Edit</a></small></td></tr>
+                <tr id="tr-edit-options" style="height:15px;display:none;"><td></td><td style="text-align:right;"><small><a onclick="editDashboard('notify','save');" style="float:right;">Save</a><a onclick="editDashboard('notify','cancel');" style="float:right;margin-right:10px;">Cancel</a></small></td></tr>
+            </table>
+            <table class="dash-box" style="margin-top:20px;">
+                
+                <tr><td colspan="2"><h1 style="margin:0" >Timeline</h1></td><tr>
+                    <tr><td colspan="2">All signs will be updated to status of Recover after Election Date.</td></tr>
+                    <tr id="tr-view-election">
+                        <td width="40%">Election Date</td>
+                        <td><div id="view-election" style="margin-left:-10px;display:inline-block;"><?= $this->dashboard['date_election'] ?></div><small><a onclick="editDashboard('election','edit');" style="float:right;">Edit</a></small>
+                        </td>
+                    </tr>
+                    <tr style="display:none" id="tr-edit-election">
+                        <td width="40%">Election Date</td>
+                        <td><input type="text" id="input-election" class="dpick input-dpick" style="cursor:pointer !important;margin-right:3px; width:75px !important;" readonly="readonly" id="datepicker-event"/><small><a style="margin-top:5px; float:right;" onclick="editDashboard('election','save');" style="float:right;">Save</a><a onclick="editDashboard('election','cancel');" style="float:right;margin-top:5px;margin-right:5px;">Cancel</a></small>
+                        </td>
+                      
+                    </tr>
+<!--                <tr style="height:15px;"><td></td><td style="text-align:right;"><small><a href="#">Edit</a></small></td></tr>-->
+                <tr><td width="40%">Subscription Ends</td><td><div style="margin-left:-10px;"><?= $this->dashboard['days'] ?> Days</div></td><tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="editModal" data-backdrop="static" class="modal hide fade center600" style="max-width:350px; height:280px;margin-left:-175px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Edit Inventory</h3>
+  </div>
+    <div class="modal-body">
+    <div class="row-fluid"> 
+    	<div class="span12">
+        	<label>Name <small id="modal-sm-name">(e.g. XL Sign)</small></label>
+            <input id="edit-name" maxlength="100" type="text" class="span11 limited-text" style="width:100%">
+            
+        </div>
+        
+    
+    </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <label>Quantity</label>
+            <input id="edit-quantity" type="text" class="span11 limited-text" style="width:100%">
+            
+            </div>
+            <div class="span6">
+                <label>Unit Price</label>
+            <div><div style="position:absolute;margin-left:5px;margin-top:5px;">$</div> <input id="edit-price" type="text" class="span11 limited-text" style="width:100%;padding-left:15px;"></div>
+            
+                </div>
+            
+        </div>
+        <div class="row-fluid" id="modal-options-signs">
+        <div class="span6">
+                <label id="lbl-material">Material</label>
+            <select id="edit-material" style="width:100%;">
+                 <option value="0">None</option>
+                <?php
+                for($i=0;$i<count($inventory);$i++){
+                    if($inventory[$i]['inventory_type']=='Material'){
+                        echo '<option value="'.$inventory[$i]['inventory_id'].'">'.$inventory[$i]['name'].'</option>';
+                    }
+                }
+                ?>
+            </select>
+                </div>
+            <div class="span6">
+                <label id="lbl-num">Number per Sign</label>
+            <select id="edit-num" style="width:100%;">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+                </div>
+            </div>
+        </div>
+  <div class="modal-footer">
+ 
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button class="btn btn-primary" id="btn-update" onclick="editSave();">Save</button>
+  </div>
+</div>
+<script>
+var _INVENTORY = <?= $items ?>;
+</script>

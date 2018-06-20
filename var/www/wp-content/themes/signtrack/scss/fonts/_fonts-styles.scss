@@ -1,0 +1,137 @@
+
+// ----- Font Weights
+
+h1, h2, h3, h4, h5, h6, strong, b {
+	font-weight: $bold-weight;
+}
+
+
+
+
+// ----- Colors
+body {
+	color: $text-color;
+}
+
+applet, object, iframe, div,
+h1, h2, h3, h4, h5, h6, blockquote,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	color: inherit;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+	color: $headline-color;
+	a, p, span, strong, em, i, b {
+		color: $headline-color !important;
+	}
+	&.headline-alt {
+		color: $headline-alt-color;
+		font-style: italic;
+		a, p, span, strong, em, i, b {
+			color: $headline-alt-color;
+			font-style: italic;
+		}
+	}
+	/* & + h1, + h2, + h3, + h4, + h5, + h6 {
+		color: \$tertiary;
+	} */
+}
+
+mark {
+	background-color: $secondary;
+	// padding: 0 3px;
+	@include padding(0, $padding-xxs);
+}
+
+
+// ----- General Styles
+
+p {
+	// margin-top: 8px;
+	// margin-bottom: 8px;
+
+	@include margin_dir($margin-small, 'top');
+	@include margin_dir($margin-small, 'bottom');
+
+}
+
+sup {
+	vertical-align: super;
+}
+
+sub {
+	vertical-align: sub;
+}
+
+em, i {
+	font-weight: $thin-weight;
+	font-style: italic;
+}
+
+
+blockquote {
+	// margin: 21px 55px;
+	@include margin($margin-large, $margin-xl);
+	overflow: hidden;
+	cite {
+		clear: both;
+		float: right;
+		// margin-top: 21px;
+		@include margin_dir($margin-large, 'top');
+		color: $primary;
+		position: relative;
+		@include font-relation($h5-size);
+		&:before {
+			content: '-';
+			position: absolute;
+			top: 0;
+			right: 100%;
+		}
+	}
+}
+
+cite {
+	font-style: italic;
+	font-weight: $bold-weight;
+}
+
+q {
+	font-weight: $thin-weight;
+	font-style: oblique;
+	position: relative;
+	&:before {
+		content: '"';
+		position: absolute;
+		top: 0;
+		right: 100%;
+	}
+	&:after {
+		content: '"';
+		position: absolute;
+		bottom: 0;
+		left: 100%;
+	}
+}
+
+a {
+	color: $link-color;
+	font-weight: $bold-weight;
+	&:hover {
+		color: $link-hover-color;
+	}
+}
+
+abbr {
+	font-weight: $bold-weight;
+}

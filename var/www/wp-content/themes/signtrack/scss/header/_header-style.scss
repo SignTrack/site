@@ -1,0 +1,81 @@
+/**
+ * Existing Genesis Functionality
+ */
+
+#header {
+	background-color: $teal;
+	color: $text-color;
+}
+
+.font-logo {
+	@include font-relation(60);
+	@include padding_dir($padding, 'top');
+	&:hover {
+		color: $text-color;
+	}
+}
+
+.widely-header-sidebar {
+	position: fixed;
+	left: 0;
+	height: 100%;
+	border-right: 2px solid $secondary;
+
+	#header {
+		height: 100%;
+		.wrap {
+			width: 100%;
+		}
+	}
+
+	#title-area {
+		width: 100% !important;
+	}
+	.widget-area.header-widget-area {
+		width: 100% !important;
+	}
+
+	.header-widget-area {
+		text-align: left;
+
+		.widget {
+			// padding: 13px;
+			@include padding($padding);
+			text-align: left;
+			h1, h2, h3, h4, h5, h6 {
+				text-align: center;
+			}
+		}
+	}
+}
+
+.widely-header-sidebar-content {
+	float: right;
+}
+
+
+.homepage-parallax-header {
+	position: fixed;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: -2;
+	img {
+		position: absolute;
+		height: 100%;
+		top: 0;
+		left: 0;
+		max-width: none;
+		padding: 0;
+		margin: 0;
+	}
+}
+.appstore {
+	text-align:center;
+	margin-top:20px;
+	img{
+		margin:10px
+	}
+}

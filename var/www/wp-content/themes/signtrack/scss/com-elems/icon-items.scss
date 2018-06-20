@@ -1,0 +1,52 @@
+.icon-container {
+	width: 100%;
+	.icon-img {
+		text-align: center;
+		width: 100%;
+		height: 150px;
+		vertical-align: baseline;
+		max-width: 100%;
+		img {
+			max-height: 100%;
+		}
+	}
+	.icon-text {
+		width: 100%;
+		text-align: center;
+		@include padding($padding-xs); // 5px
+		@include font-relation($h5-size);
+	}
+}
+
+
+
+.icon-group {
+	clear: both;
+	float: none;
+	overflow: hidden;
+	&.four-icons {
+		.icon-container {
+			@extend .grid-1-4th;
+			.icon-img {
+				height: 150px;
+			}
+		}
+	}
+}
+
+
+
+.icon-only-group {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	.icon-img {
+		align-self: center;
+		img {
+			max-height: 150px;
+			@include margin($margin-xs); // 5px
+
+		}
+	}
+}

@@ -1,0 +1,115 @@
+
+<div id="itemGrid" ></div>
+
+<script>
+    var grid;
+    var dataView;
+    var items = <?= json_encode($this->items) ?>;
+    var searchString=$("#input-sign").val();
+    var selectId=$('#select-user').val();
+
+    var RowNumberFormatter = function(row, cell, value, columnDef,dataContext) {
+        return row + 1;
+    };
+    var columns = [
+        //    {id: "edit_btn", name: "Edit", field: "id", width: 50, formatter: Slick.Formatters.ButtonEdit},
+        {id: "rowNumber", name:"", field: "", formatter:RowNumberFormatter, width:60, cannotTriggerInsert:true, resizable:false, unselectable:true, sortable:false, enableColumnReorder: true},
+        {id: "sign_id", name: "Sign ID", field: "sign_id", width: 120, sortable: true, formatter:Slick.Formatters.SignIdFormatter},
+        {id: "name", name: "Name", field: "name", width: 160, sortable: true},
+        {id: "action", name: "Action", field: "action", width: 120, sortable: true},
+//        {id: "status", name: "Status", field: "status", width: 100, sortable: true},
+        {id: "date_log", name: "Date", field: "date_log", width: 160, sortable: true, formatter: Slick.Formatters.LogTimeFormatter},
+        {id: "distance", name: "Distance", field: "distance", width: 100, sortable: true, formatter: Slick.Formatters.DistanceFormatter},
+        {id: "img", name: "Image", field: "sign_id", width: 120, sortable: false, formatter: Slick.Formatters.SignImageFormatter}
+    ];
+
+    var options = {
+        rowHeight: 40,
+        enableCellNavigation: false,
+        enableColumnReorder: false,
+        multiColumnSort: true
+    };
+    
+    function myFilter(item, args) {
+ 
+        if (selectId != 0 && item["user_id"] != selectId) {
+            console.log(selectId+":"+item["user_id"]);
+            return false;
+        }
+        if (args.searchString != "" && item["sign_id"].indexOf(searchString) == -1) {
+            console.log('option2');
+            return false;
+        }
+        return true;
+    }
+    
+   
+    $(function () {
+        dataView= new Slick.Data.DataView({ inlineFilters: true });
+         $("#input-sign").keyup(function (e) {
+            
+            if (e.which == 27) {
+                this.value = "";
+            }
+
+            searchString = this.value.replace(/\D/g,'');
+            updateFilter();
+        });
+        $('#select-user').change(function(){
+            selectId=this.value;
+            updateFilter();
+        })
+    function updateFilter() {
+        dataView.setFilterArgs({
+            searchString: searchString,
+            selectId:selectId
+        });
+        dataView.refresh();
+        grid.invalidate();
+            grid.render();
+    }
+    
+        $('.slick-cell img').mouseover(function(event){
+            var src = $(this).attr('src');
+            $('body').append('<div class="bigger-img"></div>');
+            $('.bigger-img').css('background-image',"url('"+src+"')");
+            $('.bigger-img').css('left',(event.pageX-280)+'px');
+            $('.bigger-img').css('top',(event.pageY-280)+'px');
+        });
+        $('.slick-cell img').mouseout(function(e){
+            $('.bigger-img').remove();
+        });
+        dataView.beginUpdate();
+        dataView.setItems(items, 'log_id');
+        dataView.setFilterArgs({
+        searchString: searchString
+        });
+        dataView.setFilter(myFilter);
+        dataView.endUpdate();
+
+        grid = new Slick.Grid($("#itemGrid"), dataView, columns, options);
+    grid.onSort.subscribe(function (e, args) {
+            console.log("testing");
+            var cols = args.sortCols;
+
+            dataView.sort(function (dataRow1, dataRow2) {
+                for (var i = 0, l = cols.length; i < l; i++) {
+                    var field = cols[i].sortCol.field;
+                    var sign = cols[i].sortAsc ? 1 : -1;
+                    var value1 = dataRow1[field], value2 = dataRow2[field];
+                    var result = (value1 == value2 ? 0 : (value1 > value2 ? 1 : -1)) * sign;
+                    if (result != 0) {
+                        return result;
+                    }
+                }
+                return 0;
+            });
+            grid.invalidate();
+            grid.render();
+        
+        
+        });
+        
+    })
+    
+</script>
